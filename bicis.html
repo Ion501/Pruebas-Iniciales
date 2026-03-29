@@ -1,343 +1,242 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeSealant Expert Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .status-red { border: 6px solid #ef4444 !important; background: #fee2e2 !important; }
+        .status-green { border: 6px solid #22c55e !important; background: #f0fdf4 !important; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 50; overflow-y: auto; padding: 20px; }
+        input, select { border: 3px solid #cbd5e1; padding: 12px; border-radius: 15px; width: 100%; color: #000; font-weight: 900; font-size: 1.2rem; background: white !important; }
+        .text-ml-gigante { font-size: 2.8rem; font-weight: 900; color: #1e40af; line-height: 1; }
+        .text-dias-gigante { font-size: 3.5rem; font-weight: 900; line-height: 1; color: #000; }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="es"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;BikeSealant Pro XL&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-red { border: 6px solid #ef4444; background: #fee2e2; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-green { border: 6px solid #22c55e; background: #f0fdf4; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 50; overflow-y: auto; padding: 10px; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input, select { border: 3px solid #cbd5e1; padding: 10px; border-radius: 12px; width: 100%; color: #000; font-weight: 900; font-size: 1.1rem; background: white; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.text-ml-gigante { font-size: 2.8rem; font-weight: 900; color: #1e40af; line-height: 1; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.text-dias-gigante { font-size: 3.5rem; font-weight: 900; line-height: 1; color: #000; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body class="bg-gray-300 text-slate-900 min-h-screen pb-32 font-sans px-4"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-emerald-600 text-white px-10 py-4 rounded-2xl shadow-2xl font-black z-[100] border-4 border-white text-xl text-center uppercase"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>✅ ACTUALIZADO</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-[1600px] mx-auto"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;header class="flex justify-between items-center py-6 bg-white px-8 rounded-3xl shadow-lg my-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-3xl font-black italic tracking-tighter uppercase leading-none"&gt;Bike&lt;span class="text-blue-600"&gt;Sealant&lt;/span&gt;&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button onclick="openSettings()" class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-white shadow-xl"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;i class="fas fa-cog"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- GRID 4 COLUMNAS --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button onclick="openBikeModal()" class="fixed bottom-10 right-8 bg-blue-700 w-20 h-20 rounded-full shadow-2xl text-4xl flex items-center justify-center text-white border-4 border-white z-40"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;i class="fas fa-plus"&gt;&lt;/i&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- MODAL BICICLETA (Compacto) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="bikeModal" class="modal flex items-center justify-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white p-6 rounded-[2.5rem] w-full max-w-sm shadow-2xl border-4 border-blue-600"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h2 id="modalTitle" class="text-2xl font-black uppercase mb-4 text-center italic border-b-4 pb-2"&gt;Cargar Bici&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;label class="text-[10px] font-black uppercase text-slate-400"&gt;Nombre de la Bici&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;input id="bikeName" type="text" placeholder="EJ: MI TREK" class="bg-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-2 gap-3 text-slate-900"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;select id="bikeCategory" onchange="updateMLSuggestions()"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value="Ruta"&gt;RUTA&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value="Gravel"&gt;GRAVEL&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value="Montaña" selected&gt;MONTAÑA&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;select id="tireSize" onchange="updateMLSuggestions()"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value='700c'&gt;700c&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value='26"'&gt;26"&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value='29"'&gt;29"&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value='32"'&gt;32"&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-2 gap-3 text-slate-900"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;select id="tireWidth" onchange="updateMLSuggestions()"&gt;&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;select id="liquidType"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value="natural"&gt;NATURAL&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;option value="sintetico"&gt;SINTÉTICO&lt;/option&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="bg-gray-100 p-4 rounded-2xl space-y-3"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-[10px] font-black text-slate-500 uppercase text-center italic"&gt;Editar fechas manualmente&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label class="text-[9px] font-black uppercase"&gt;Últ. Cambio Total&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="manualChangeDate" type="date" class="text-sm p-2 bg-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;label class="text-[9px] font-black uppercase"&gt;Últ. Relleno&lt;/label&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="manualRefillDate" type="date" class="text-sm p-2 bg-white"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div id="mlHint" class="bg-blue-600 text-white p-4 rounded-xl text-center text-2xl font-black"&gt;&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flex gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onclick="closeModal('bikeModal')" class="flex-1 bg-slate-200 text-slate-500 p-4 rounded-xl font-black uppercase text-sm"&gt;Cerrar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-sm"&gt;Guardar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;input id="editIndex" type="hidden" value="-1"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- MODAL AJUSTES --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="settingsModal" class="modal"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="p-6 min-h-screen flex items-center justify-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-md text-slate-900"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-2xl font-black uppercase mb-6 border-b-4 border-black italic"&gt;Ajustes&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-3 gap-2 text-center font-black text-[10px] uppercase text-slate-400"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div&gt;TIPO&lt;/div&gt;&lt;div&gt;RELL.&lt;/div&gt;&lt;div&gt;CAMBIO&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-2 font-black"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="w-20 text-xs"&gt;NATURAL&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="freq_nat_rell" type="number" class="text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="freq_nat_full" type="number" class="text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-2 font-black"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="w-20 text-xs"&gt;SINTÉTICO&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="freq_sin_rell" type="number" class="text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input id="freq_sin_full" type="number" class="text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button onclick="saveFrequencies()" class="w-full bg-blue-600 text-white p-4 rounded-xl font-black uppercase text-xs"&gt;Guardar Tabla&lt;/button&gt;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="border-t pt-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-black text-slate-400 uppercase text-xs mb-2"&gt;Alta de Llantas (Ancho mm)&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="flex gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input id="newWidth" type="number" placeholder="MM" class="flex-1 p-2 bg-white text-slate-900 font-bold border-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl"&gt;+&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div id="widthList" class="flex flex-wrap gap-2 py-2"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="border-t pt-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-black text-slate-400 uppercase text-xs mb-2 text-center"&gt;Seguridad (Backup)&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="grid grid-cols-2 gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button onclick="exportData()" class="bg-emerald-600 text-white p-3 rounded-xl font-black text-[10px] uppercase"&gt;Exportar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button onclick="document.getElementById('importFile').click()" class="bg-amber-600 text-white p-3 rounded-xl font-black text-[10px] uppercase"&gt;Importar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;input type="file" id="importFile" class="hidden" onchange="importData(event)"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 text-slate-500 p-4 rounded-xl font-black mt-6"&gt;CERRAR&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let appConfig = JSON.parse(localStorage.getItem('bsc_expert_v8')) || {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>widths: [25, 28, 30, 42, 45, 50, 55],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>freq: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>natural: { rell: 3, full: 8 },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>sintetico: { rell: 5, full: 12 }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let bikes = JSON.parse(localStorage.getItem('bikes_expert_v8')) || [];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function calculateML(category, size, width) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let baseFactor = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let ml = width * baseFactor;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (category === 'Montaña') ml *= 1.25;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (category === 'Gravel') ml *= 1.1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (category === 'Ruta') ml *= 0.95;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return Math.round(ml / 10) * 10;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function saveAppData() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>localStorage.setItem('bsc_expert_v8', JSON.stringify(appConfig));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>localStorage.setItem('bikes_expert_v8', JSON.stringify(bikes));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderBikes();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function openBikeModal(index = -1) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('tireWidth').innerHTML = appConfig.widths.map(w =&gt; `&lt;option value="${w}"&gt;${w} mm&lt;/option&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const today = new Date().toISOString().split('T')[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('editIndex').value = index;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if(index &gt;= 0) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const b = bikes[index];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('modalTitle').innerText = "EDITAR BICI";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('bikeName').value = b.name;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('bikeCategory').value = b.category;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('tireSize').value = b.size;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('tireWidth').value = b.width;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('liquidType').value = b.liquid;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('manualChangeDate').value = b.lastChange;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('manualRefillDate').value = b.lastRefill;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('modalTitle').innerText = "NUEVA BICI";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('bikeName').value = "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('manualChangeDate').value = today;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>document.getElementById('manualRefillDate').value = today;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('bikeModal').style.display = 'flex';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateMLSuggestions();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function saveBike() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const idx = parseInt(document.getElementById('editIndex').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const data = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>name: document.getElementById('bikeName').value || "BICI SIN NOMBRE",</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>category: document.getElementById('bikeCategory').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>size: document.getElementById('tireSize').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>width: document.getElementById('tireWidth').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>liquid: document.getElementById('liquidType').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>lastChange: document.getElementById('manualChangeDate').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>lastRefill: document.getElementById('manualRefillDate').value</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if(idx &gt;= 0) bikes[idx] = data; else bikes.push(data);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>saveAppData(); closeModal('bikeModal'); showOk();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function quickUpdate(index, type) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const today = new Date().toISOString().split('T')[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (type === 'relleno') bikes[index].lastRefill = today;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>else { bikes[index].lastChange = today; bikes[index].lastRefill = today; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>saveAppData(); showOk();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function updateMLSuggestions() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const cat = document.getElementById('bikeCategory').value;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const size = document.getElementById('tireSize').value;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const width = document.getElementById('tireWidth').value;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const ml = calculateML(cat, size, width);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('mlHint').innerText = `${ml} ML`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function saveFrequencies() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>appConfig.freq.natural.rell = parseInt(document.getElementById('freq_nat_rell').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>appConfig.freq.natural.full = parseInt(document.getElementById('freq_nat_full').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>appConfig.freq.sintetico.rell = parseInt(document.getElementById('freq_sin_rell').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>appConfig.freq.sintetico.full = parseInt(document.getElementById('freq_sin_full').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>saveAppData(); showOk();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function addWidth() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const val = parseInt(document.getElementById('newWidth').value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if(val &amp;&amp; !appConfig.widths.includes(val)) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>appConfig.widths.push(val); appConfig.widths.sort((a,b)=&gt;a-b);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>saveAppData(); renderWidthList();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function renderWidthList() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('widthList').innerHTML = appConfig.widths.map(w =&gt; `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="bg-black text-white px-3 py-1 rounded-xl font-bold flex items-center gap-2 text-xs"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>${w}mm &lt;button onclick="appConfig.widths=appConfig.widths.filter(x=&gt;x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black"&gt;&amp;times;&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function openSettings() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('freq_nat_rell').value = appConfig.freq.natural.rell;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('freq_nat_full').value = appConfig.freq.natural.full;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('freq_sin_rell').value = appConfig.freq.sintetico.rell;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('freq_sin_full').value = appConfig.freq.sintetico.full;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderWidthList();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById('settingsModal').style.display = 'block';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function exportData() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const data = { config: appConfig, bikes: bikes };</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const a = document.createElement('a');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>a.href = URL.createObjectURL(blob);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>a.download = `backup_bicis.json`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>a.click();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function importData(e) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>reader.onload = (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const data = JSON.parse(e.target.result);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if(data.config &amp;&amp; data.bikes) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>appConfig = data.config; bikes = data.bikes;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>saveAppData(); location.reload();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>reader.readAsText(e.target.files[0]);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function closeModal(id) { document.getElementById(id).style.display = 'none'; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function showOk() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const t = document.getElementById('toast');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>t.classList.remove('hidden');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; t.classList.add('hidden'), 3000);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function renderBikes() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const container = document.getElementById('bikeList');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>container.innerHTML = "";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const today = new Date(); today.setHours(0,0,0,0);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>bikes.forEach((bike, index) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const conf = bike.liquid === 'natural' ? appConfig.freq.natural : appConfig.freq.sintetico;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const nextRell = new Date(bike.lastRefill); nextRell.setMonth(nextRell.getMonth() + conf.rell);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const nextFull = new Date(bike.lastChange); nextFull.setMonth(nextFull.getMonth() + conf.full);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dRell = Math.ceil((nextRell - today) / 8.64e7);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const dFull = Math.ceil((nextFull - today) / 8.64e7);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const mlFull = calculateML(bike.category, bike.size, bike.width);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const mlRell = Math.round(mlFull / 2);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>container.innerHTML += `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="rounded-[2.5rem] shadow-xl p-6 bg-white ${dRell &lt;= 0 || dFull &lt;= 0 ? 'status-red' : 'status-green'} flex flex-col"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start mb-4 border-b pb-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="w-full"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;h3 class="text-3xl font-black uppercase italic text-slate-900 leading-tight"&gt;${bike.name}&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;p class="text-[10px] font-black text-blue-700 uppercase"&gt;${bike.category} | ${bike.size} x ${bike.width}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="flex gap-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;button onclick="openBikeModal(${index})" class="text-3xl text-slate-300 hover:text-slate-900"&gt;&lt;i class="fas fa-edit"&gt;&lt;/i&gt;&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;button onclick="if(confirm('¿Borrar?')){bikes.splice(${index},1);saveAppData();}" class="text-3xl text-red-100 hover:text-red-600"&gt;&lt;i class="fas fa-trash"&gt;&lt;/i&gt;&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-blue-50 p-4 rounded-3xl border border-blue-100 flex justify-between items-center leading-none"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div&gt;&lt;p class="text-[9px] font-black uppercase text-blue-800 mb-1"&gt;Relleno&lt;/p&gt;&lt;p class="text-ml-gigante"&gt;${mlRell}&lt;span class="text-xs"&gt;ml&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div class="text-right"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-[9px] font-black text-slate-400 uppercase"&gt;Faltan&lt;/p&gt;&lt;p class="text-dias-gigante ${dRell &lt;= 0 ? 'text-red-600 animate-pulse' : ''}"&gt;${dRell}d&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button onclick="quickUpdate(${index}, 'relleno')" class="mt-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px]"&gt;Hecho&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="bg-emerald-50 p-4 rounded-3xl border border-emerald-100 flex justify-between items-center leading-none"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div&gt;&lt;p class="text-[9px] font-black uppercase text-emerald-800 mb-1"&gt;Cambio&lt;/p&gt;&lt;p class="text-ml-gigante"&gt;${mlFull}&lt;span class="text-xs"&gt;ml&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div class="text-right"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-[9px] font-black text-slate-400 uppercase"&gt;Faltan&lt;/p&gt;&lt;p class="text-dias-gigante ${dFull &lt;= 0 ? 'text-red-600 animate-pulse' : ''}"&gt;${dFull}d&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button onclick="quickUpdate(${index}, 'cambio')" class="mt-2 bg-emerald-600 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px]"&gt;Hecho&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>renderBikes();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<body class="bg-gray-200 text-slate-900 min-h-screen pb-32 font-sans px-4">
+
+    <div id="toast" class="fixed top-10 left-1/2 -translate-x-1/2 hidden bg-emerald-600 text-white px-10 py-5 rounded-2xl shadow-2xl font-black z-[100] border-4 border-white text-xl text-center uppercase">
+        ✅ ACTUALIZADO
+    </div>
+
+    <div class="max-w-[1600px] mx-auto">
+        <header class="flex justify-between items-center py-6 bg-white px-8 rounded-3xl shadow-lg my-6">
+            <h1 class="text-3xl font-black italic tracking-tighter uppercase leading-none">Bike<span class="text-blue-600">Sealant</span></h1>
+            <button onclick="openSettings()" class="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-white shadow-xl">
+                <i class="fas fa-cog"></i>
+            </button>
+        </header>
+
+        <!-- GRID 4 COLUMNAS -->
+        <div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+        <button onclick="openBikeModal()" class="fixed bottom-10 right-8 bg-blue-700 w-24 h-24 rounded-full shadow-2xl text-4xl flex items-center justify-center text-white border-4 border-white z-40">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
+
+    <!-- MODAL BICICLETA COMPACTO -->
+    <div id="bikeModal" class="modal flex items-center justify-center">
+        <div class="bg-white p-8 rounded-[3rem] w-full max-w-sm shadow-2xl border-4 border-blue-600 text-slate-900">
+            <h2 id="modalTitle" class="text-2xl font-black uppercase mb-4 text-center italic border-b-4 pb-2">Cargar Bici</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-black uppercase text-slate-400">Nombre de la Bici</label>
+                    <input id="bikeName" type="text" placeholder="EJ: MI TREK">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <select id="bikeCategory" onchange="updateMLSuggestions()">
+                        <option value="Ruta">RUTA</option><option value="Gravel">GRAVEL</option><option value="Montaña" selected>MONTAÑA</option>
+                    </select>
+                    <select id="tireSize" onchange="updateMLSuggestions()">
+                        <option value='700c'>700c</option><option value='26"'>26"</option><option value='29"'>29"</option><option value='32"'>32"</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <select id="tireWidth" onchange="updateMLSuggestions()"></select>
+                    <select id="liquidType">
+                        <option value="natural">L. NATURAL</option><option value="sintetico">L. SINTÉTICO</option>
+                    </select>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-2xl space-y-3">
+                    <p class="text-[10px] font-black text-slate-500 uppercase text-center italic">Editar fechas manualmente</p>
+                    <div><label class="text-[9px] font-black uppercase">Últ. Cambio Total</label><input id="manualChangeDate" type="date"></div>
+                    <div><label class="text-[9px] font-black uppercase">Últ. Relleno</label><input id="manualRefillDate" type="date"></div>
+                </div>
+                <div id="mlHint" class="bg-blue-600 text-white p-4 rounded-xl text-center text-3xl font-black italic"></div>
+                <div class="flex gap-2">
+                    <button onclick="closeModal('bikeModal')" class="flex-1 bg-slate-200 p-4 rounded-xl font-black uppercase text-sm">Cerrar</button>
+                    <button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-sm">Guardar</button>
+                </div>
+                <input id="editIndex" type="hidden" value="-1">
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AJUSTES -->
+    <div id="settingsModal" class="modal">
+        <div class="p-6 min-h-screen flex items-center justify-center">
+            <div class="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-md text-slate-900">
+                <h2 class="text-2xl font-black uppercase mb-6 border-b-4 border-black italic text-center">Ajustes Expertos</h2>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-3 gap-2 text-center font-black text-[10px] uppercase text-slate-400">
+                        <div>TIPO</div><div>RELL. (meses)</div><div>CAMBIO (meses)</div>
+                    </div>
+                    <div class="flex items-center gap-2 font-black">
+                        <span class="w-20 text-[10px]">NATURAL</span>
+                        <input id="freq_nat_rell" type="number" class="text-center"><input id="freq_nat_full" type="number" class="text-center">
+                    </div>
+                    <div class="flex items-center gap-2 font-black">
+                        <span class="w-20 text-[10px]">SINTÉTICO</span>
+                        <input id="freq_sin_rell" type="number" class="text-center"><input id="freq_sin_full" type="number" class="text-center">
+                    </div>
+                    <button onclick="saveFrequencies()" class="w-full bg-blue-600 text-white p-4 rounded-xl font-black uppercase text-xs">Guardar Tabla</button>
+                    
+                    <div class="border-t pt-4">
+                        <h3 class="font-black text-slate-400 uppercase text-xs mb-2">Alta de Llantas (Ancho mm)</h3>
+                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
+                        <div id="widthList" class="flex flex-wrap gap-2 py-2"></div>
+                    </div>
+                </div>
+                <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 text-slate-500 p-4 rounded-xl font-black mt-6 uppercase">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let appConfig = JSON.parse(localStorage.getItem('bsc_expert_v9')) || {
+            widths: [25, 28, 30, 42, 45, 50, 55],
+            freq: { natural: { rell: 3, full: 8 }, sintetico: { rell: 5, full: 12 } }
+        };
+        let bikes = JSON.parse(localStorage.getItem('bikes_expert_v9')) || [];
+
+        function calculateML(cat, size, width) {
+            let f = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);
+            let ml = width * f;
+            if (cat === 'Montaña') ml *= 1.25; if (cat === 'Gravel') ml *= 1.1; if (cat === 'Ruta') ml *= 0.95;
+            return Math.round(ml / 10) * 10;
+        }
+
+        function saveAppData() {
+            localStorage.setItem('bsc_expert_v9', JSON.stringify(appConfig));
+            localStorage.setItem('bikes_expert_v9', JSON.stringify(bikes));
+            renderBikes();
+        }
+
+        function openBikeModal(index = -1) {
+            document.getElementById('tireWidth').innerHTML = appConfig.widths.map(w => `<option value="${w}">${w} mm</option>`).join('');
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('editIndex').value = index;
+            if(index >= 0) {
+                const b = bikes[index];
+                document.getElementById('modalTitle').innerText = "EDITAR BICI";
+                document.getElementById('bikeName').value = b.name;
+                document.getElementById('bikeCategory').value = b.category;
+                document.getElementById('tireSize').value = b.size;
+                document.getElementById('tireWidth').value = b.width;
+                document.getElementById('liquidType').value = b.liquid;
+                document.getElementById('manualChangeDate').value = b.lastChange;
+                document.getElementById('manualRefillDate').value = b.lastRefill;
+            } else {
+                document.getElementById('modalTitle').innerText = "NUEVA BICI";
+                document.getElementById('bikeName').value = "";
+                document.getElementById('manualChangeDate').value = today;
+                document.getElementById('manualRefillDate').value = today;
+            }
+            document.getElementById('bikeModal').style.display = 'flex';
+            updateMLSuggestions();
+        }
+
+        function saveBike() {
+            const idx = parseInt(document.getElementById('editIndex').value);
+            const data = {
+                name: document.getElementById('bikeName').value || "BICI SIN NOMBRE",
+                category: document.getElementById('bikeCategory').value,
+                size: document.getElementById('tireSize').value,
+                width: document.getElementById('tireWidth').value,
+                liquid: document.getElementById('liquidType').value,
+                lastChange: document.getElementById('manualChangeDate').value,
+                lastRefill: document.getElementById('manualRefillDate').value
+            };
+            if(idx >= 0) bikes[idx] = data; else bikes.push(data);
+            saveAppData(); closeModal('bikeModal'); showOk();
+        }
+
+        function quickUpdate(index, type) {
+            const today = new Date().toISOString().split('T')[0];
+            if (type === 'relleno') bikes[index].lastRefill = today;
+            else { bikes[index].lastChange = today; bikes[index].lastRefill = today; }
+            saveAppData(); showOk();
+        }
+
+        function updateMLSuggestions() {
+            const ml = calculateML(document.getElementById('bikeCategory').value, document.getElementById('tireSize').value, document.getElementById('tireWidth').value);
+            document.getElementById('mlHint').innerText = `${ml} ML`;
+        }
+
+        function saveFrequencies() {
+            appConfig.freq.natural.rell = parseInt(document.getElementById('freq_nat_rell').value);
+            appConfig.freq.natural.full = parseInt(document.getElementById('freq_nat_full').value);
+            appConfig.freq.sintetico.rell = parseInt(document.getElementById('freq_sin_rell').value);
+            appConfig.freq.sintetico.full = parseInt(document.getElementById('freq_sin_full').value);
+            saveAppData(); showOk();
+        }
+
+        function addWidth() {
+            const v = parseInt(document.getElementById('newWidth').value);
+            if(v && !appConfig.widths.includes(v)) { appConfig.widths.push(v); appConfig.widths.sort((a,b)=>a-b); saveAppData(); renderWidthList(); }
+        }
+
+        function renderWidthList() {
+            document.getElementById('widthList').innerHTML = appConfig.widths.map(w => `<div class="bg-black text-white px-3 py-1 rounded-xl font-bold flex items-center gap-2 text-xs">${w}mm <button onclick="appConfig.widths=appConfig.widths.filter(x=>x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black">&times;</button></div>`).join('');
+        }
+
+        function openSettings() {
+            document.getElementById('freq_nat_rell').value = appConfig.freq.natural.rell;
+            document.getElementById('freq_nat_full').value = appConfig.freq.natural.full;
+            document.getElementById('freq_sin_rell').value = appConfig.freq.sintetico.rell;
+            document.getElementById('freq_sin_full').value = appConfig.freq.sintetico.full;
+            renderWidthList();
+            document.getElementById('settingsModal').style.display = 'block';
+        }
+
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function showOk() { const t = document.getElementById('toast'); t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 3000); }
+
+        function renderBikes() {
+            const container = document.getElementById('bikeList');
+            container.innerHTML = "";
+            const today = new Date(); today.setHours(0,0,0,0);
+            bikes.forEach((bike, index) => {
+                const conf = bike.liquid === 'natural' ? appConfig.freq.natural : appConfig.freq.sintetico;
+                const nextRell = new Date(bike.lastRefill); nextRell.setMonth(nextRell.getMonth() + conf.rell);
+                const nextFull = new Date(bike.lastChange); nextFull.setMonth(nextFull.getMonth() + conf.full);
+                const dRell = Math.ceil((nextRell - today) / 8.64e7);
+                const dFull = Math.ceil((nextFull - today) / 8.64e7);
+                const mlFull = calculateML(bike.category, bike.size, bike.width);
+                container.innerHTML += `<div class="rounded-[2.5rem] shadow-xl p-6 bg-white ${dRell <= 0 || dFull <= 0 ? 'status-red' : 'status-green'}">
+                    <div class="flex justify-between items-start mb-4 border-b pb-2 text-slate-900">
+                        <div class="w-full">
+                            <h3 class="text-3xl font-black uppercase italic leading-tight">${bike.name}</h3>
+                            <p class="text-[10px] font-black text-blue-700 uppercase">${bike.category} | ${bike.size} x ${bike.width}</p>
+                        </div>
+                        <div class="flex gap-4"><button onclick="openBikeModal(${index})" class="text-3xl text-slate-300 hover:text-slate-900"><i class="fas fa-edit"></i></button><button onclick="if(confirm('¿Borrar?')){bikes.splice(${index},1);saveAppData();}" class="text-3xl text-red-100"><i class="fas fa-trash"></i></button></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-3xl border flex justify-between items-center leading-none text-slate-900">
+                            <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
+                            <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p><button onclick="quickUpdate(${index}, 'relleno')" class="mt-2 bg-blue-600 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px]">Hecho</button></div>
+                        </div>
+                        <div class="bg-emerald-50 p-4 rounded-3xl border flex justify-between items-center leading-none text-slate-900">
+                            <div><p class="text-[9px] font-black uppercase text-emerald-800 mb-1">Cambio</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
+                            <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dFull <= 0 ? 'text-red-600 animate-pulse' : ''}">${dFull}d</p><button onclick="quickUpdate(${index}, 'cambio')" class="mt-2 bg-emerald-600 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px]">Hecho</button></div>
+                        </div>
+                    </div></div>`;
+            });
+        }
+        renderBikes();
+    </script>
 </body>
 </html>
