@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALEXANDER BIKES - Cloud Sync</title>
+    <title>ALEXANDER BIKES - Expert Pro Cloud</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* // Estilos UI Globales // */
-        html, body { overflow-x: hidden; width: 100%; position: relative; }
+        /* // Estilos UI // */
+        html, body { overflow-x: hidden; width: 100%; }
         .status-red { border: 6px solid #ef4444 !important; background: #fee2e2 !important; }
         .status-green { border: 6px solid #22c55e !important; background: #f0fdf4 !important; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; overflow-y: auto; padding: 10px; }
         input, select { border: 2px solid #cbd5e1; padding: 10px; border-radius: 12px; width: 100%; color: #000; font-weight: 800; font-size: 1rem; background: white !important; }
         .text-ml-gigante { font-size: 2.5rem; font-weight: 900; color: #1e40af; line-height: 1; }
         .text-dias-gigante { font-size: 3rem; font-weight: 900; line-height: 1; color: #000; }
-        
-        /* // Splash Alexander Bikes // */
         #splash { position: fixed; inset: 0; background: #000; z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
-        
-        /* // Alineación Toggles // */
         .control-label { display: flex; align-items: center; gap: 8px; justify-content: flex-start; width: 100%; cursor: pointer; }
         .control-label input { width: 22px !important; height: 22px !important; margin: 0 !important; cursor: pointer; flex-shrink: 0; }
     </style>
@@ -35,16 +31,16 @@
     </div>
 
     <!-- Notificación Toast -->
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-blue-900 text-white px-8 py-4 rounded-2xl shadow-2xl font-black z-[110] border-2 border-blue-400 text-center uppercase text-sm">
-        ✅ Sincronizado con la Nube
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-blue-900 text-white px-10 py-4 rounded-2xl shadow-2xl font-black z-[110] border-2 border-blue-400 text-center uppercase text-sm">
+        ✅ SINCRONIZADO
     </div>
 
     <div class="max-w-[1400px] mx-auto px-4">
-        <!-- // CABECERA AJUSTADA PARA MÓVIL // -->
+        <!-- // CABECERA // -->
         <header class="flex justify-between items-center py-4 bg-white px-6 rounded-2xl shadow-lg my-4 border-b-4 border-blue-600">
             <div>
                 <h1 class="text-2xl font-black italic tracking-tighter uppercase leading-none text-slate-800">Alexander<span class="text-blue-600">Bikes</span></h1>
-                <div id="cloudIndicator" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic">
+                <div id="cloudStatus" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic leading-none">
                     <i class="fas fa-cloud mr-1"></i> <span id="statusText">Modo Local</span>
                 </div>
             </div>
@@ -53,7 +49,7 @@
             </button>
         </header>
 
-        <!-- // TABLERO 4 COLUMNAS // -->
+        <!-- // LISTADO 4 COLUMNAS // -->
         <div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
 
         <!-- Botón + -->
@@ -66,8 +62,8 @@
     <div id="bikeModal" class="modal">
         <div class="flex items-center justify-center min-h-full">
             <div class="bg-white p-6 rounded-[2.5rem] w-full max-w-sm shadow-2xl border-4 border-blue-600 text-slate-900">
-                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black">Configurar Bici</h2>
-                <div class="space-y-3">
+                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black">Cargar Bici</h2>
+                <div class="space-y-3 text-slate-900">
                     <input id="bikeName" type="text" placeholder="NOMBRE DE LA BICI">
                     <div class="grid grid-cols-2 gap-2">
                         <select id="bikeCategory" onchange="updateMLSuggestions()">
@@ -97,8 +93,8 @@
                     <div class="bg-gray-100 p-3 rounded-2xl space-y-2">
                         <p class="text-[9px] font-black text-slate-600 uppercase text-center border-b pb-1 italic">Fechas Manuales</p>
                         <div class="grid grid-cols-2 gap-2">
-                            <div><label class="text-[7px] font-black uppercase">Cambio Sellador</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[7px] font-black uppercase">Relleno Sellador</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[7px] font-black uppercase">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[7px] font-black uppercase">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[7px] font-black uppercase">Overhaul</label><input id="dateOverhaul" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[7px] font-black uppercase">Cadena</label><input id="dateCadena" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[7px] font-black uppercase">Pastillas</label><input id="datePastillas" type="date" class="text-[10px] p-1"></div>
@@ -123,19 +119,18 @@
             <div class="bg-white p-6 rounded-[3rem] shadow-2xl w-full max-w-md border-4 border-slate-900">
                 <h2 class="text-xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes del Taller</h2>
                 
-                <div class="space-y-4">
-                    <!-- NUBE REAL -->
+                <div class="space-y-4 text-slate-900">
+                    <!-- NUBE REAL MEJORADA -->
                     <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-white">
-                        <label class="text-[10px] font-black uppercase mb-2 block text-blue-100">Nombre Único del Taller</label>
+                        <label class="text-[10px] font-black uppercase mb-2 block text-blue-100 italic font-black">Sincronización Mac / iPhone</label>
                         <div class="flex gap-2">
-                            <input id="workshopName" type="text" placeholder="Ej: Alexander_Bikes_77" class="text-xs flex-1 text-slate-900 font-black">
-                            <button onclick="cloudConnect()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase">VINCULAR</button>
+                            <input id="workshopName" type="text" placeholder="EJ: TALLER_ALEX_PRO" class="text-xs flex-1 text-slate-900 font-black uppercase bg-white">
+                            <button onclick="cloudSyncConnect()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase">CONECTAR</button>
                         </div>
-                        <p class="text-[8px] text-blue-200 mt-2 italic">* Usa el MISMO NOMBRE en Mac y Celular para unir los datos.</p>
+                        <p class="text-[7px] text-blue-200 mt-2 font-bold leading-tight uppercase">Poner el mismo nombre en ambos dispositivos.</p>
                     </div>
 
-                    <!-- TIEMPOS -->
-                    <div class="grid grid-cols-2 gap-2 text-slate-900 font-bold">
+                    <div class="grid grid-cols-2 gap-2 font-bold">
                         <div><label class="text-[8px] uppercase">Nat. Relleno (m)</label><input id="freqNatRell" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Nat. Cambio (m)</label><input id="freqNatFull" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Overhaul (m)</label><input id="freqOverhaul" type="number" class="p-1 text-xs"></div>
@@ -146,9 +141,9 @@
                     <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-3 rounded-xl font-black uppercase text-xs">Guardar Tiempos</button>
                     
                     <div class="border-t pt-2">
-                        <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic">Llantas (mm)</h3>
-                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 p-1 text-xs border-2 border-slate-300"><button onclick="addWidth()" class="bg-black text-white px-4 rounded-xl font-black text-xl">+</button></div>
-                        <div id="widthList" class="flex flex-wrap gap-2 py-2"></div>
+                        <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic">Alta de Llantas (mm)</h3>
+                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 p-1 text-xs border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-4 rounded-xl font-black text-xl">+</button></div>
+                        <div id="widthList" class="flex flex-wrap gap-1 py-2"></div>
                     </div>
                 </div>
                 <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 p-3 rounded-xl font-black mt-4 uppercase text-xs">Cerrar</button>
@@ -157,66 +152,66 @@
     </div>
 
     <script>
-        // // Manejo de Datos // //
-        let config = JSON.parse(localStorage.getItem('alex_bikes_v19_config')) || {
+        // // Lógica de Manejo de Datos // //
+        let config = JSON.parse(localStorage.getItem('alex_v20_config')) || {
             widths: [25, 28, 30, 42, 45, 50, 55],
             freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 },
             workshop: ''
         };
-        let bikes = JSON.parse(localStorage.getItem('alex_bikes_v19_data')) || [];
+        let bikes = JSON.parse(localStorage.getItem('alex_v20_data')) || [];
 
-        // // Lógica de Sincronización Real (Usando JSONBin.io público) // //
-        // Esta es una URL de puente. Tu nombre de taller será la sub-llave.
-        const SYNC_API = "https://api.jsonbin.io/v3/b/661858a7e41b4d34e4e1df36"; 
-        const API_KEY = "$2a$10$fV3M9E3I3.1X0C0K5O2X6eB9vX.ZqQv.Pj7V0W5k8P1I9Xv5U6Z2W"; // Llave de lectura/escritura pública para tu App
+        // // API NUBE (KVSTORE PUBLIC) // //
+        const API_BASE = "https://kvstore.io/api/alex_workshop/";
 
-        async function cloudConnect() {
+        async function cloudSyncConnect() {
             const name = document.getElementById('workshopName').value.trim().toLowerCase();
             if(!name) return alert("Escribe un nombre de taller");
             
+            document.getElementById('statusText').innerText = "☁️ Vinculando...";
             config.workshop = name;
-            document.getElementById('statusText').innerText = "Conectando...";
-            
-            // Intentar bajar datos existentes
-            await pullFromCloud();
-            saveAppData();
-            location.reload();
+
+            try {
+                const res = await fetch(API_BASE + name);
+                if(res.ok) {
+                    const cloudData = await res.json();
+                    if(confirm("✅ Datos encontrados en la nube. ¿Deseas recuperarlos en este dispositivo?")) {
+                        config = cloudData.config;
+                        bikes = cloudData.bikes;
+                        saveAppData(false); // No volver a subir de inmediato
+                        location.reload();
+                    }
+                } else {
+                    alert("✨ Taller nuevo vinculado. Los datos se guardarán en esta clave.");
+                    saveAppData(true);
+                }
+            } catch(e) { alert("Error de conexión a internet"); }
         }
 
-        async function pushToCloud() {
+        async function syncWithCloud() {
             if(!config.workshop) return;
+            document.getElementById('statusText').innerText = "☁️ Subiendo...";
             try {
-                // Para Alexander, usamos un sistema de almacenamiento por prefijo en el servidor
-                const response = await fetch(`https://kvstore.io/api/alexander_bikes/${config.workshop}`, {
+                await fetch(API_BASE + config.workshop, {
                     method: 'POST',
                     body: JSON.stringify({ config, bikes })
                 });
-                document.getElementById('statusText').innerText = "Nube: " + config.workshop;
-            } catch (e) { console.error("Error al subir"); }
+                document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
+            } catch(e) { document.getElementById('statusText').innerText = "⚠️ Error Sync"; }
         }
 
-        async function pullFromCloud() {
-            if(!config.workshop) return;
-            try {
-                const response = await fetch(`https://kvstore.io/api/alexander_bikes/${config.workshop}`);
-                if(response.ok) {
-                    const data = await response.json();
-                    config = data.config;
-                    bikes = data.bikes;
-                    return true;
-                }
-            } catch (e) { console.error("Error al bajar"); }
-            return false;
+        function saveAppData(push = true) {
+            localStorage.setItem('alex_v20_config', JSON.stringify(config));
+            localStorage.setItem('alex_v20_data', JSON.stringify(bikes));
+            if(push && config.workshop) syncWithCloud();
+            renderBikes();
         }
 
-        // // Control de Inicio // //
+        // // Inicio // //
         window.addEventListener('load', async () => {
             renderBikes();
             if(config.workshop) {
-                document.getElementById('statusText').innerText = "Sincronizando...";
-                await pullFromCloud();
-                renderBikes();
-                document.getElementById('statusText').innerText = "Nube: " + config.workshop;
+                document.getElementById('workshopName').value = config.workshop;
+                await syncWithCloud();
             }
             setTimeout(() => {
                 const splash = document.getElementById('splash');
@@ -238,13 +233,6 @@
             const nextDate = new Date(dateStr);
             nextDate.setMonth(nextDate.getMonth() + parseInt(months));
             return Math.ceil((nextDate - today) / 8.64e7);
-        }
-
-        function saveAppData() {
-            localStorage.setItem('alex_bikes_v19_config', JSON.stringify(config));
-            localStorage.setItem('alex_bikes_v19_data', JSON.stringify(bikes));
-            if(config.workshop) pushToCloud();
-            renderBikes();
         }
 
         // // UI Modals // //
@@ -343,14 +331,14 @@
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio Sellador</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
                                 <div class="text-right">
                                     <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
-                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
+                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">Hecho</button>
                                 </div>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900">
-                                <div><p class="text-[9px] font-black uppercase text-slate-500 mb-1">Relleno Sellador</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
+                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno Sellador</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
                                 <div class="text-right">
                                     <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
-                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
+                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">Hecho</button>
                                 </div>
                             </div>
                             <div class="border-t pt-2 space-y-1">${rows}</div>
@@ -364,7 +352,7 @@
                 <span class="text-[10px] font-black uppercase">${label}</span>
                 <div class="flex items-center gap-4">
                     <span class="text-sm font-black ${days <= 0 ? 'text-red-600 animate-pulse' : ''}">${days}d</span>
-                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">HECHO</button>
+                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">Hecho</button>
                 </div>
             </div>`;
         }
