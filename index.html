@@ -7,15 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* // Estilos UI // */
-        html, body { overflow-x: hidden; width: 100%; }
+        /* // Estilos UI Globales // */
+        html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
         .status-red { border: 6px solid #ef4444 !important; background: #fee2e2 !important; }
         .status-green { border: 6px solid #22c55e !important; background: #f0fdf4 !important; }
+        
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; overflow-y: auto; padding: 10px; }
-        input, select { border: 2px solid #cbd5e1; padding: 10px; border-radius: 12px; width: 100%; color: #000; font-weight: 800; font-size: 1rem; background: white !important; }
+        
+        /* Inputs con contraste */
+        input, select { border: 3px solid #cbd5e1 !important; padding: 10px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; font-size: 1rem; background: white !important; }
+        
+        /* Tipografía Gigante */
         .text-ml-gigante { font-size: 2.5rem; font-weight: 900; color: #1e40af; line-height: 1; }
         .text-dias-gigante { font-size: 3rem; font-weight: 900; line-height: 1; color: #000; }
+        
         #splash { position: fixed; inset: 0; background: #000; z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        
         .control-label { display: flex; align-items: center; gap: 8px; justify-content: flex-start; width: 100%; cursor: pointer; }
         .control-label input { width: 22px !important; height: 22px !important; margin: 0 !important; cursor: pointer; flex-shrink: 0; }
     </style>
@@ -24,27 +31,27 @@
 
     <!-- // PANTALLA BIENVENIDA // -->
     <div id="splash">
-        <h1 class="text-4xl font-black italic text-white tracking-tighter uppercase text-center">
+        <h1 class="text-4xl font-black italic text-white tracking-tighter uppercase text-center leading-none">
             ALEXANDER BIKES<br>
             <span class="text-blue-500 text-xl not-italic tracking-[0.3em]">BIENVENIDO</span>
         </h1>
     </div>
 
     <!-- Notificación Toast -->
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-blue-900 text-white px-10 py-4 rounded-2xl shadow-2xl font-black z-[110] border-2 border-blue-400 text-center uppercase text-sm">
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-blue-900 text-white px-8 py-4 rounded-2xl shadow-2xl font-black z-[110] border-2 border-blue-400 text-center uppercase text-sm">
         ✅ SINCRONIZADO
     </div>
 
     <div class="max-w-[1400px] mx-auto px-4">
-        <!-- // CABECERA // -->
-        <header class="flex justify-between items-center py-4 bg-white px-6 rounded-2xl shadow-lg my-4 border-b-4 border-blue-600">
-            <div>
-                <h1 class="text-2xl font-black italic tracking-tighter uppercase leading-none text-slate-800">Alexander<span class="text-blue-600">Bikes</span></h1>
-                <div id="cloudStatus" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic leading-none">
+        <!-- // CABECERA MEJORADA PARA MÓVIL // -->
+        <header class="flex justify-between items-center py-4 bg-white px-4 md:px-8 rounded-2xl shadow-lg my-4 border-b-4 border-blue-600 overflow-hidden">
+            <div class="overflow-hidden">
+                <h1 class="text-xl md:text-3xl font-black italic tracking-tighter uppercase leading-none text-slate-800 truncate">Alexander<span class="text-blue-600">Bikes</span></h1>
+                <div id="cloudStatus" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic">
                     <i class="fas fa-cloud mr-1"></i> <span id="statusText">Modo Local</span>
                 </div>
             </div>
-            <button onclick="openSettings()" class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center text-xl text-white shadow-lg shrink-0">
+            <button onclick="openSettings()" class="w-10 h-10 md:w-14 md:h-14 bg-slate-900 rounded-xl flex items-center justify-center text-xl text-white shadow-xl ml-2 shrink-0">
                 <i class="fas fa-cog"></i>
             </button>
         </header>
@@ -61,9 +68,9 @@
     <!-- // MODAL BICICLETA // -->
     <div id="bikeModal" class="modal">
         <div class="flex items-center justify-center min-h-full">
-            <div class="bg-white p-6 rounded-[2.5rem] w-full max-w-sm shadow-2xl border-4 border-blue-600 text-slate-900">
-                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black">Cargar Bici</h2>
-                <div class="space-y-3 text-slate-900">
+            <div class="bg-white p-6 rounded-[2.5rem] w-full max-w-md shadow-2xl border-4 border-blue-600 text-slate-900">
+                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black">Configurar Bici</h2>
+                <div class="space-y-3">
                     <input id="bikeName" type="text" placeholder="NOMBRE DE LA BICI">
                     <div class="grid grid-cols-2 gap-2">
                         <select id="bikeCategory" onchange="updateMLSuggestions()">
@@ -90,8 +97,9 @@
                         </div>
                     </div>
 
+                    <!-- FECHAS MANUALES RESTAURADAS PARA TODO -->
                     <div class="bg-gray-100 p-3 rounded-2xl space-y-2">
-                        <p class="text-[9px] font-black text-slate-600 uppercase text-center border-b pb-1 italic">Fechas Manuales</p>
+                        <p class="text-[9px] font-black text-slate-600 uppercase text-center border-b pb-1 italic">Historial de Mantenimiento</p>
                         <div class="grid grid-cols-2 gap-2">
                             <div><label class="text-[7px] font-black uppercase">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[7px] font-black uppercase">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
@@ -116,23 +124,26 @@
     <!-- // MODAL AJUSTES // -->
     <div id="settingsModal" class="modal">
         <div class="flex items-center justify-center min-h-full">
-            <div class="bg-white p-6 rounded-[3rem] shadow-2xl w-full max-w-md border-4 border-slate-900">
+            <div class="bg-white p-6 rounded-[3rem] shadow-2xl w-full max-w-md border-4 border-slate-900 text-slate-900">
                 <h2 class="text-xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes del Taller</h2>
                 
-                <div class="space-y-4 text-slate-900">
-                    <!-- NUBE REAL MEJORADA -->
+                <div class="space-y-4">
+                    <!-- NUBE REAL BASADA EN NOMBRE -->
                     <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-white">
-                        <label class="text-[10px] font-black uppercase mb-2 block text-blue-100 italic font-black">Sincronización Mac / iPhone</label>
+                        <label class="text-[10px] font-black uppercase mb-1 block text-blue-100 italic">Nombre del Taller (Sincronizar)</label>
                         <div class="flex gap-2">
-                            <input id="workshopName" type="text" placeholder="EJ: TALLER_ALEX_PRO" class="text-xs flex-1 text-slate-900 font-black uppercase bg-white">
-                            <button onclick="cloudSyncConnect()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase">CONECTAR</button>
+                            <input id="workshopName" type="text" placeholder="Ej: Alexander_Bikes_77" class="text-xs flex-1 text-slate-900 font-black">
+                            <button onclick="cloudSyncInit()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase leading-none">VINCULAR</button>
                         </div>
-                        <p class="text-[7px] text-blue-200 mt-2 font-bold leading-tight uppercase">Poner el mismo nombre en ambos dispositivos.</p>
+                        <p class="text-[8px] text-blue-200 mt-2 leading-tight uppercase font-bold text-center italic">Usa el mismo nombre en Mac e iPhone.</p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 font-bold">
+                    <!-- TODOS LOS TIEMPOS RESTAURADOS -->
+                    <div class="grid grid-cols-2 gap-2 font-bold text-slate-900">
                         <div><label class="text-[8px] uppercase">Nat. Relleno (m)</label><input id="freqNatRell" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Nat. Cambio (m)</label><input id="freqNatFull" type="number" class="p-1 text-xs"></div>
+                        <div><label class="text-[8px] uppercase">Sin. Relleno (m)</label><input id="freqSinRell" type="number" class="p-1 text-xs"></div>
+                        <div><label class="text-[8px] uppercase">Sin. Cambio (m)</label><input id="freqSinFull" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Overhaul (m)</label><input id="freqOverhaul" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Cadena (m)</label><input id="freqCadena" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Pastillas (m)</label><input id="freqPastillas" type="number" class="p-1 text-xs"></div>
@@ -140,10 +151,11 @@
                     </div>
                     <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-3 rounded-xl font-black uppercase text-xs">Guardar Tiempos</button>
                     
+                    <!-- ANCHOS RESTAURADOS -->
                     <div class="border-t pt-2">
                         <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic">Alta de Llantas (mm)</h3>
                         <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 p-1 text-xs border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-4 rounded-xl font-black text-xl">+</button></div>
-                        <div id="widthList" class="flex flex-wrap gap-1 py-2"></div>
+                        <div id="widthList" class="flex flex-wrap gap-1 py-1"></div>
                     </div>
                 </div>
                 <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 p-3 rounded-xl font-black mt-4 uppercase text-xs">Cerrar</button>
@@ -153,65 +165,71 @@
 
     <script>
         // // Lógica de Manejo de Datos // //
-        let config = JSON.parse(localStorage.getItem('alex_v20_config')) || {
+        let config = JSON.parse(localStorage.getItem('alex_v21_config')) || {
             widths: [25, 28, 30, 42, 45, 50, 55],
             freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 },
             workshop: ''
         };
-        let bikes = JSON.parse(localStorage.getItem('alex_v20_data')) || [];
+        let bikes = JSON.parse(localStorage.getItem('alex_v21_data')) || [];
 
-        // // API NUBE (KVSTORE PUBLIC) // //
-        const API_BASE = "https://kvstore.io/api/alex_workshop/";
+        // // API NUBE (NPOINT - CORS FRIENDLY) // //
+        const API_URL = "https://api.npoint.io/46908819058b7631742a"; // Bin compartido de Alexander Bikes
 
-        async function cloudSyncConnect() {
+        async function cloudSyncInit() {
             const name = document.getElementById('workshopName').value.trim().toLowerCase();
-            if(!name) return alert("Escribe un nombre de taller");
+            if(!name) return alert("Escribe un nombre para tu taller");
             
-            document.getElementById('statusText').innerText = "☁️ Vinculando...";
             config.workshop = name;
+            document.getElementById('statusText').innerText = "☁️ Conectando...";
 
             try {
-                const res = await fetch(API_BASE + name);
-                if(res.ok) {
-                    const cloudData = await res.json();
-                    if(confirm("✅ Datos encontrados en la nube. ¿Deseas recuperarlos en este dispositivo?")) {
-                        config = cloudData.config;
-                        bikes = cloudData.bikes;
-                        saveAppData(false); // No volver a subir de inmediato
+                const res = await fetch(API_URL);
+                const cloudData = await res.json();
+                
+                if(cloudData[name]) {
+                    if(confirm("✅ Se encontraron bicis de '" + name + "' en la nube. ¿Deseas cargarlas ahora?")) {
+                        config = cloudData[name].config;
+                        bikes = cloudData[name].bikes;
+                        saveAppData(false);
                         location.reload();
                     }
                 } else {
-                    alert("✨ Taller nuevo vinculado. Los datos se guardarán en esta clave.");
+                    alert("✨ Taller nuevo: '" + name + "'. Tus datos se guardarán aquí.");
                     saveAppData(true);
                 }
-            } catch(e) { alert("Error de conexión a internet"); }
+            } catch(e) { alert("Error de red. Verifica tu internet."); }
         }
 
-        async function syncWithCloud() {
+        async function syncToCloud() {
             if(!config.workshop) return;
             document.getElementById('statusText').innerText = "☁️ Subiendo...";
             try {
-                await fetch(API_BASE + config.workshop, {
+                const res = await fetch(API_URL);
+                let cloudData = await res.json();
+                cloudData[config.workshop] = { config, bikes };
+                
+                await fetch(API_URL, {
                     method: 'POST',
-                    body: JSON.stringify({ config, bikes })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cloudData)
                 });
                 document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
             } catch(e) { document.getElementById('statusText').innerText = "⚠️ Error Sync"; }
         }
 
         function saveAppData(push = true) {
-            localStorage.setItem('alex_v20_config', JSON.stringify(config));
-            localStorage.setItem('alex_v20_data', JSON.stringify(bikes));
-            if(push && config.workshop) syncWithCloud();
+            localStorage.setItem('alex_v21_config', JSON.stringify(config));
+            localStorage.setItem('alex_v21_data', JSON.stringify(bikes));
+            if(push && config.workshop) syncToCloud();
             renderBikes();
         }
 
-        // // Inicio // //
-        window.addEventListener('load', async () => {
+        // // Control de Inicio // //
+        window.addEventListener('load', () => {
             renderBikes();
             if(config.workshop) {
                 document.getElementById('workshopName').value = config.workshop;
-                await syncWithCloud();
+                syncToCloud();
             }
             setTimeout(() => {
                 const splash = document.getElementById('splash');
@@ -327,18 +345,18 @@
                             <div class="flex gap-4"><button onclick="openBikeModal(${index})" class="text-3xl text-slate-300 hover:text-slate-900"><i class="fas fa-edit"></i></button><button onclick="if(confirm('¿Borrar?')){bikes.splice(${index},1);saveAppData();}" class="text-3xl text-red-100 hover:text-red-600"><i class="fas fa-trash"></i></button></div>
                         </div>
                         <div class="space-y-4">
-                            <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900">
+                            <div class="bg-blue-50 p-4 rounded-3xl border flex justify-between items-center text-slate-900">
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio Sellador</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
                                 <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
-                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">Hecho</button>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
+                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-4 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
                                 </div>
                             </div>
-                            <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900">
+                            <div class="bg-blue-50 p-4 rounded-3xl border flex justify-between items-center text-slate-900">
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno Sellador</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
                                 <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
-                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">Hecho</button>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
+                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-4 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
                                 </div>
                             </div>
                             <div class="border-t pt-2 space-y-1">${rows}</div>
@@ -352,7 +370,7 @@
                 <span class="text-[10px] font-black uppercase">${label}</span>
                 <div class="flex items-center gap-4">
                     <span class="text-sm font-black ${days <= 0 ? 'text-red-600 animate-pulse' : ''}">${days}d</span>
-                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">Hecho</button>
+                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">HECHO</button>
                 </div>
             </div>`;
         }
@@ -365,7 +383,7 @@
         function saveFrequencies() {
             config.freq = {
                 natRell: document.getElementById('freqNatRell').value, natFull: document.getElementById('freqNatFull').value,
-                sinRell: config.freq.sinRell, sinFull: config.freq.sinFull, 
+                sinRell: document.getElementById('freqSinRell').value, sinFull: document.getElementById('freqSinFull').value,
                 overhaul: document.getElementById('freqOverhaul').value, cadena: document.getElementById('freqCadena').value,
                 pastillas: document.getElementById('freqPastillas').value, bateria: document.getElementById('freqBateria').value
             };
@@ -376,6 +394,7 @@
             const f = config.freq;
             document.getElementById('workshopName').value = config.workshop;
             document.getElementById('freqNatRell').value = f.natRell; document.getElementById('freqNatFull').value = f.natFull;
+            document.getElementById('freqSinRell').value = f.sinRell; document.getElementById('freqSinFull').value = f.sinFull;
             document.getElementById('freqOverhaul').value = f.overhaul; document.getElementById('freqCadena').value = f.cadena;
             document.getElementById('freqPastillas').value = f.pastillas; document.getElementById('freqBateria').value = f.bateria;
             renderWidthList();
