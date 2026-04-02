@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALEXANDER BIKES v15</title>
+    <title>ALEXANDER BIKES v16</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -19,12 +19,11 @@
         
         #splash { position: fixed; inset: 0; background: #000; z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; opacity: 1; pointer-events: none; }
         
-        /* Alineación Estricta Activar Controles */
         .control-label { display: flex; align-items: center; gap: 10px; justify-content: flex-start; width: 100%; cursor: pointer; padding: 5px 0; }
-        .control-label input { width: 24px !important; height: 24px !important; margin: 0 !important; flex-shrink: 0; cursor: pointer; }
+        .control-label input { width: 24px !important; height: 24px !important; margin: 0 !important; cursor: pointer; flex-shrink: 0; }
     </style>
 </head>
-<body class="text-slate-900 min-h-screen pb-32 font-sans">
+<body class="text-slate-900 min-h-screen pb-32 font-sans px-4">
 
     <!-- // 1. SPLASH // -->
     <div id="splash">
@@ -39,15 +38,15 @@
         ✅ NUBE ACTUALIZADA
     </div>
 
-    <div class="max-w-[1600px] mx-auto px-4">
+    <div class="max-w-[1600px] mx-auto">
         <!-- // 3. CABECERA // -->
         <header class="flex justify-between items-center py-6 bg-white px-6 md:px-8 rounded-3xl shadow-lg my-6 border-b-4 border-blue-600">
-            <div class="overflow-hidden">
+            <div>
                 <h1 class="text-2xl md:text-4xl font-black italic tracking-tighter uppercase leading-none text-slate-800">
                     Alexander<span class="text-blue-600 italic">Bikes</span>
-                    <span class="text-[10px] font-normal text-slate-400 ml-1">v15</span>
+                    <span class="text-[10px] font-normal text-slate-400 ml-1 italic">v16</span>
                 </h1>
-                <div id="cloudStatus" class="text-[10px] font-black uppercase text-slate-400 mt-2 italic flex items-center">
+                <div id="cloudStatus" class="text-[10px] font-black uppercase text-slate-400 mt-2 italic flex items-center leading-none">
                     <i class="fas fa-cloud mr-1"></i> <span id="statusText">Modo Local</span>
                 </div>
             </div>
@@ -86,7 +85,6 @@
                         </select>
                     </div>
 
-                    <!-- ACTIVAR CONTROLES (Alineación Corregida) -->
                     <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200">
                         <p class="text-[10px] font-black uppercase text-slate-500 mb-3 border-b pb-1 text-center font-black">Activar Controles</p>
                         <div class="grid grid-cols-2 gap-y-1 gap-x-4">
@@ -97,7 +95,6 @@
                         </div>
                     </div>
 
-                    <!-- FECHAS MANUALES (Todas restauradas) -->
                     <div class="bg-gray-100 p-4 rounded-2xl space-y-3">
                         <p class="text-[10px] font-black text-slate-600 uppercase text-center border-b pb-1">Fechas Manuales</p>
                         <div class="grid grid-cols-2 gap-3">
@@ -125,19 +122,17 @@
     <div id="settingsModal" class="modal">
         <div class="flex items-center justify-center min-h-full p-2">
             <div class="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-lg border-4 border-slate-900 text-slate-900">
-                <h2 class="text-2xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes</h2>
+                <h2 class="text-2xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes del Taller</h2>
                 <div class="space-y-4">
-                    <!-- NUBE PANTRY (SIN FALLOS) -->
                     <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-white">
-                        <label class="text-[11px] font-black uppercase mb-1 block text-blue-100">Nombre del Taller (Sincronizar)</label>
+                        <label class="text-[11px] font-black uppercase mb-1 block text-blue-100">Clave de Sincronización</label>
                         <div class="flex gap-2">
                             <input id="workshopName" type="text" placeholder="Ej: Alexander_Bikes_Taller" class="text-xs flex-1 text-slate-900 font-black uppercase">
-                            <button onclick="cloudSyncInit()" class="bg-slate-900 text-white px-4 rounded-xl font-black text-[10px] uppercase">CONECTAR</button>
+                            <button onclick="cloudManualPull()" class="bg-slate-900 text-white px-4 rounded-xl font-black text-[10px] uppercase shadow-md leading-none">Vincular / Jalar</button>
                         </div>
-                        <p class="text-[8px] mt-2 italic text-blue-100 uppercase">* Usa este mismo nombre en Mac y Celular para unir datos.</p>
+                        <p class="text-[8px] mt-2 italic text-blue-100 uppercase">* Pon el mismo nombre en Mac y Celular para unir datos.</p>
                     </div>
 
-                    <!-- FRECUENCIAS (8 CAMPOS) -->
                     <div class="grid grid-cols-2 gap-3 font-bold">
                         <div><label class="text-[9px] uppercase">Nat. Relleno</label><input id="freqNatRell" type="number"></div>
                         <div><label class="text-[9px] uppercase">Nat. Cambio</label><input id="freqNatFull" type="number"></div>
@@ -150,7 +145,7 @@
                     </div>
                     <button onclick="saveFrequencies()" class="w-full bg-blue-600 text-white p-4 rounded-xl font-black uppercase text-xs shadow-lg">Guardar Tiempos</button>
                     
-                    <div class="border-t pt-4">
+                    <div class="border-t pt-4 text-slate-900 font-bold">
                         <h3 class="font-black text-slate-400 uppercase text-xs mb-2 italic">Llantas (mm)</h3>
                         <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
                         <div id="widthList" class="flex flex-wrap gap-2 py-2"></div>
@@ -163,71 +158,84 @@
 
     <!-- // 7. JS LÓGICA // -->
     <script>
-        let config = JSON.parse(localStorage.getItem('alex_v15_config')) || {
+        let config = JSON.parse(localStorage.getItem('alex_v16_config')) || {
             widths: [25, 28, 30, 42, 45, 50, 55],
             freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 },
-            workshop: ''
+            workshop: '', lastUpdated: 0
         };
-        let bikes = JSON.parse(localStorage.getItem('alex_v15_data')) || [];
+        let bikes = JSON.parse(localStorage.getItem('alex_v16_data')) || [];
 
-        // // MOTOR DE ARRANQUE NO BLOQUEANTE // //
+        const PANTRY_ID = "63d76e73-9076-470a-9d66-70e6459c7171";
+
+        // // INICIO DE APP (ULTRA RÁPIDO) // //
         document.addEventListener('DOMContentLoaded', () => {
             renderBikes();
             setTimeout(() => {
                 const sp = document.getElementById('splash');
                 if(sp) { sp.style.opacity = '0'; setTimeout(() => sp.style.display='none', 600); }
             }, 3000);
-            if(config.workshop) pullFromCloud();
+            if(config.workshop) pullFromCloud(true); // Sync silencioso al abrir
         });
 
-        // // SISTEMA DE NUBE PANTRY // //
-        const PANTRY_ID = "63d76e73-9076-470a-9d66-70e6459c7171"; // Alexander Bikes Master Pantry
-
-        async function cloudSyncInit() {
+        // // NUBE: RECUPERACIÓN Y GUARDADO // //
+        async function cloudManualPull() {
             const name = document.getElementById('workshopName').value.trim().toLowerCase().replace(/[^a-z0-9]/g, '_');
             if(!name) return alert("Escribe un nombre de taller");
             config.workshop = name;
-            await pullFromCloud();
-            saveAppData(false);
-            location.reload();
+            document.getElementById('statusText').innerText = "☁️ Recuperando...";
+            const success = await pullFromCloud(false);
+            if(success) { alert("✅ DATOS RECUPERADOS: Tu taller está al día."); location.reload(); }
+            else { alert("✨ TALLER NUEVO: Esta clave guardará tus bicis actuales."); saveAppData(); }
         }
 
-        async function pullFromCloud() {
-            if(!config.workshop) return;
-            document.getElementById('statusText').innerText = "☁️ Sincronizando...";
+        async function pullFromCloud(silent = true) {
+            if(!config.workshop) return false;
             try {
-                const res = await fetch(`https://getpantry.cloud/apiv1/pantry/${PANTRY_ID}/basket/${config.workshop}`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 seg timeout
+
+                const res = await fetch(`https://getpantry.cloud/apiv1/pantry/${PANTRY_ID}/basket/${config.workshop}`, { signal: controller.signal });
                 if(res.ok) {
                     const cloud = await res.json();
-                    config = cloud.config;
-                    bikes = cloud.bikes;
-                    document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
-                    renderBikes();
+                    // Solo jala si la nube es más nueva que lo local
+                    if(cloud.lastUpdated > config.lastUpdated) {
+                        config = cloud.config;
+                        bikes = cloud.bikes;
+                        config.lastUpdated = cloud.lastUpdated;
+                        localStorage.setItem('alex_v16_config', JSON.stringify(config));
+                        localStorage.setItem('alex_v16_data', JSON.stringify(bikes));
+                        renderBikes();
+                        document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
+                        return true;
+                    }
                 }
-            } catch(e) { document.getElementById('statusText').innerText = "⚠️ Modo Local"; }
+            } catch(e) { console.warn("Sync cloud falló o timeout"); }
+            document.getElementById('statusText').innerText = config.workshop ? "✅ Nube Activa" : "Modo Local";
+            return false;
         }
 
         async function syncToCloud() {
             if(!config.workshop) return;
+            config.lastUpdated = Date.now();
             try {
                 await fetch(`https://getpantry.cloud/apiv1/pantry/${PANTRY_ID}/basket/${config.workshop}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ config, bikes })
+                    body: JSON.stringify({ config, bikes, lastUpdated: config.lastUpdated })
                 });
-                document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
+                document.getElementById('statusText').innerText = "✅ Nube OK";
                 showOk();
             } catch(e) { document.getElementById('statusText').innerText = "⚠️ Error Sync"; }
         }
 
-        function saveAppData(push = true) {
-            localStorage.setItem('alex_v15_config', JSON.stringify(config));
-            localStorage.setItem('alex_v15_data', JSON.stringify(bikes));
-            if(push && config.workshop) syncToCloud();
+        function saveAppData() {
+            localStorage.setItem('alex_v16_config', JSON.stringify(config));
+            localStorage.setItem('alex_v16_data', JSON.stringify(bikes));
+            if(config.workshop) syncToCloud();
             renderBikes();
         }
 
-        // // CORE // //
+        // // CÁLCULOS // //
         function calculateML(cat, size, width) {
             let f = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);
             let ml = width * f;
@@ -242,7 +250,7 @@
             return Math.ceil((nextDate - today) / 8.64e7);
         }
 
-        // // UI // //
+        // // UI MODALS // //
         function openBikeModal(index = -1) {
             document.getElementById('tireWidth').innerHTML = config.widths.map(w => `<option value="${w}">${w} mm</option>`).join('');
             const today = new Date().toISOString().split('T')[0];
@@ -335,11 +343,17 @@
                         <div class="space-y-4">
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900">
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio Sellador</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
-                                <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p><button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button></div>
+                                <div class="text-right">
+                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
+                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">HECHO</button>
+                                </div>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900">
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno Sellador</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
-                                <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p><button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button></div>
+                                <div class="text-right">
+                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
+                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">HECHO</button>
+                                </div>
                             </div>
                             <div class="border-t pt-2 space-y-1">${rows}</div>
                         </div>
