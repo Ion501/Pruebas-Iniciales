@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALEXANDER BIKES - Expert Pro Cloud</title>
+    <title>ALEXANDER BIKES v10</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* // Estilos UI Globales // */
-        html, body { overflow-x: hidden; width: 100%; position: relative; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; }
         .status-red { border: 6px solid #ef4444 !important; background: #fee2e2 !important; }
         .status-green { border: 6px solid #22c55e !important; background: #f0fdf4 !important; }
-        
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; overflow-y: auto; padding: 10px; }
-        
-        /* Inputs con contraste */
-        input, select { border: 3px solid #cbd5e1 !important; padding: 10px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; font-size: 1rem; background: white !important; }
-        
-        /* Tipografía Gigante */
+        input, select { border: 3px solid #cbd5e1 !important; padding: 10px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; background: white !important; }
         .text-ml-gigante { font-size: 2.5rem; font-weight: 900; color: #1e40af; line-height: 1; }
         .text-dias-gigante { font-size: 3rem; font-weight: 900; line-height: 1; color: #000; }
-        
         #splash { position: fixed; inset: 0; background: #000; z-index: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
-        
         .control-label { display: flex; align-items: center; gap: 8px; justify-content: flex-start; width: 100%; cursor: pointer; }
-        .control-label input { width: 22px !important; height: 22px !important; margin: 0 !important; cursor: pointer; flex-shrink: 0; }
+        .control-label input { width: 22px !important; height: 22px !important; margin: 0 !important; }
     </style>
 </head>
 <body class="bg-gray-300 text-slate-900 min-h-screen pb-32 font-sans">
 
-    <!-- // PANTALLA BIENVENIDA // -->
+    <!-- // SPLASH SCREEN // -->
     <div id="splash">
         <h1 class="text-4xl font-black italic text-white tracking-tighter uppercase text-center leading-none">
             ALEXANDER BIKES<br>
@@ -43,11 +36,14 @@
     </div>
 
     <div class="max-w-[1400px] mx-auto px-4">
-        <!-- // CABECERA MEJORADA PARA MÓVIL // -->
-        <header class="flex justify-between items-center py-4 bg-white px-4 md:px-8 rounded-2xl shadow-lg my-4 border-b-4 border-blue-600 overflow-hidden">
+        <!-- // CABECERA CON VERSIÓN // -->
+        <header class="flex justify-between items-center py-4 bg-white px-4 md:px-8 rounded-2xl shadow-lg my-4 border-b-4 border-blue-600">
             <div class="overflow-hidden">
-                <h1 class="text-xl md:text-3xl font-black italic tracking-tighter uppercase leading-none text-slate-800 truncate">Alexander<span class="text-blue-600">Bikes</span></h1>
-                <div id="cloudStatus" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic">
+                <h1 class="text-xl md:text-3xl font-black italic tracking-tighter uppercase leading-none text-slate-800">
+                    Alexander<span class="text-blue-600">Bikes</span>
+                    <span class="text-[10px] font-normal text-slate-400 ml-1 lowercase">v10</span>
+                </h1>
+                <div id="cloudStatus" class="text-[9px] font-black uppercase text-slate-400 mt-1 italic leading-none">
                     <i class="fas fa-cloud mr-1"></i> <span id="statusText">Modo Local</span>
                 </div>
             </div>
@@ -56,10 +52,8 @@
             </button>
         </header>
 
-        <!-- // LISTADO 4 COLUMNAS // -->
         <div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
 
-        <!-- Botón + -->
         <button onclick="openBikeModal()" class="fixed bottom-6 right-6 bg-blue-700 w-16 h-16 rounded-full shadow-2xl text-2xl flex items-center justify-center text-white border-4 border-white z-40">
             <i class="fas fa-plus"></i>
         </button>
@@ -67,9 +61,9 @@
 
     <!-- // MODAL BICICLETA // -->
     <div id="bikeModal" class="modal">
-        <div class="flex items-center justify-center min-h-full">
-            <div class="bg-white p-6 rounded-[2.5rem] w-full max-w-md shadow-2xl border-4 border-blue-600 text-slate-900">
-                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black">Configurar Bici</h2>
+        <div class="flex items-center justify-center min-h-full p-2">
+            <div class="bg-white p-6 rounded-[2.5rem] w-full max-w-sm shadow-2xl border-4 border-blue-600 text-slate-900">
+                <h2 id="modalTitle" class="text-xl font-black uppercase mb-4 text-center italic border-b-2 pb-1 text-slate-800 font-black tracking-tighter">Cargar Bici</h2>
                 <div class="space-y-3">
                     <input id="bikeName" type="text" placeholder="NOMBRE DE LA BICI">
                     <div class="grid grid-cols-2 gap-2">
@@ -88,7 +82,7 @@
                     </div>
 
                     <div class="bg-slate-100 p-3 rounded-xl border border-slate-200">
-                        <p class="text-[10px] font-black uppercase text-slate-500 mb-2 border-b pb-1 text-center font-black italic">Servicios Activos</p>
+                        <p class="text-[10px] font-black uppercase text-slate-500 mb-2 border-b pb-1 text-center italic">Activar Controles</p>
                         <div class="grid grid-cols-2 gap-y-2">
                             <label class="control-label text-xs font-black"><input type="checkbox" id="checkOverhaul" checked> Overhaul</label>
                             <label class="control-label text-xs font-black"><input type="checkbox" id="checkCadena" checked> Cadena</label>
@@ -97,9 +91,8 @@
                         </div>
                     </div>
 
-                    <!-- FECHAS MANUALES RESTAURADAS PARA TODO -->
                     <div class="bg-gray-100 p-3 rounded-2xl space-y-2">
-                        <p class="text-[9px] font-black text-slate-600 uppercase text-center border-b pb-1 italic">Historial de Mantenimiento</p>
+                        <p class="text-[9px] font-black text-slate-600 uppercase text-center border-b pb-1 italic">Historial de Fechas</p>
                         <div class="grid grid-cols-2 gap-2">
                             <div><label class="text-[7px] font-black uppercase">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[7px] font-black uppercase">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
@@ -125,20 +118,18 @@
     <div id="settingsModal" class="modal">
         <div class="flex items-center justify-center min-h-full">
             <div class="bg-white p-6 rounded-[3rem] shadow-2xl w-full max-w-md border-4 border-slate-900 text-slate-900">
-                <h2 class="text-xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes del Taller</h2>
+                <h2 class="text-xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Ajustes</h2>
                 
                 <div class="space-y-4">
-                    <!-- NUBE REAL BASADA EN NOMBRE -->
+                    <!-- Nube -->
                     <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-white">
-                        <label class="text-[10px] font-black uppercase mb-1 block text-blue-100 italic">Nombre del Taller (Sincronizar)</label>
+                        <label class="text-[10px] font-black uppercase mb-1 block text-blue-100 italic">Nombre del Taller</label>
                         <div class="flex gap-2">
-                            <input id="workshopName" type="text" placeholder="Ej: Alexander_Bikes_77" class="text-xs flex-1 text-slate-900 font-black">
-                            <button onclick="cloudSyncInit()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase leading-none">VINCULAR</button>
+                            <input id="workshopName" type="text" placeholder="EJ: TALLER_ALEX" class="text-xs flex-1 text-slate-900 font-black bg-white uppercase">
+                            <button onclick="cloudConnect()" class="bg-slate-900 text-white px-3 rounded-xl font-black text-[9px] uppercase">VINCULAR</button>
                         </div>
-                        <p class="text-[8px] text-blue-200 mt-2 leading-tight uppercase font-bold text-center italic">Usa el mismo nombre en Mac e iPhone.</p>
                     </div>
 
-                    <!-- TODOS LOS TIEMPOS RESTAURADOS -->
                     <div class="grid grid-cols-2 gap-2 font-bold text-slate-900">
                         <div><label class="text-[8px] uppercase">Nat. Relleno (m)</label><input id="freqNatRell" type="number" class="p-1 text-xs"></div>
                         <div><label class="text-[8px] uppercase">Nat. Cambio (m)</label><input id="freqNatFull" type="number" class="p-1 text-xs"></div>
@@ -151,10 +142,9 @@
                     </div>
                     <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-3 rounded-xl font-black uppercase text-xs">Guardar Tiempos</button>
                     
-                    <!-- ANCHOS RESTAURADOS -->
                     <div class="border-t pt-2">
                         <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic">Alta de Llantas (mm)</h3>
-                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 p-1 text-xs border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-4 rounded-xl font-black text-xl">+</button></div>
+                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 p-1 text-xs border-2 border-slate-300 bg-white"><button onclick="addWidth()" class="bg-black text-white px-4 rounded-xl font-black text-xl">+</button></div>
                         <div id="widthList" class="flex flex-wrap gap-1 py-1"></div>
                     </div>
                 </div>
@@ -164,254 +154,74 @@
     </div>
 
     <script>
-        // // Lógica de Manejo de Datos // //
-        let config = JSON.parse(localStorage.getItem('alex_v21_config')) || {
+        // // Manejo de Datos // //
+        let config = JSON.parse(localStorage.getItem('alex_v10_config')) || {
             widths: [25, 28, 30, 42, 45, 50, 55],
             freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 },
             workshop: ''
         };
-        let bikes = JSON.parse(localStorage.getItem('alex_v21_data')) || [];
+        let bikes = JSON.parse(localStorage.getItem('alex_v10_data')) || [];
 
-        // // API NUBE (NPOINT - CORS FRIENDLY) // //
-        const API_URL = "https://api.npoint.io/46908819058b7631742a"; // Bin compartido de Alexander Bikes
+        // // API NUBE (NPOINT - MÁS ROBUSTO) // //
+        const STORAGE_ID = "46908819058b7631742a"; 
+        const API_URL = `https://api.npoint.io/${STORAGE_ID}`;
 
-        async function cloudSyncInit() {
+        async function cloudConnect() {
             const name = document.getElementById('workshopName').value.trim().toLowerCase();
-            if(!name) return alert("Escribe un nombre para tu taller");
-            
+            if(!name) return alert("Escribe un nombre de taller");
             config.workshop = name;
             document.getElementById('statusText').innerText = "☁️ Conectando...";
-
-            try {
-                const res = await fetch(API_URL);
-                const cloudData = await res.json();
-                
-                if(cloudData[name]) {
-                    if(confirm("✅ Se encontraron bicis de '" + name + "' en la nube. ¿Deseas cargarlas ahora?")) {
-                        config = cloudData[name].config;
-                        bikes = cloudData[name].bikes;
-                        saveAppData(false);
-                        location.reload();
-                    }
-                } else {
-                    alert("✨ Taller nuevo: '" + name + "'. Tus datos se guardarán aquí.");
-                    saveAppData(true);
-                }
-            } catch(e) { alert("Error de red. Verifica tu internet."); }
+            await pullFromCloud();
+            saveAppData(false);
+            location.reload();
         }
 
-        async function syncToCloud() {
+        async function pullFromCloud() {
             if(!config.workshop) return;
-            document.getElementById('statusText').innerText = "☁️ Subiendo...";
             try {
                 const res = await fetch(API_URL);
-                let cloudData = await res.json();
-                cloudData[config.workshop] = { config, bikes };
+                const data = await res.json();
+                if(data && data[config.workshop]) {
+                    config = data[config.workshop].config;
+                    bikes = data[config.workshop].bikes;
+                    return true;
+                }
+            } catch(e) { console.error("Error pull", e); }
+            return false;
+        }
+
+        async function pushToCloud() {
+            if(!config.workshop) return;
+            document.getElementById('statusText').innerText = "☁️ Guardando...";
+            try {
+                const res = await fetch(API_URL);
+                let fullData = await res.json();
+                fullData[config.workshop] = { config, bikes };
                 
                 await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cloudData)
+                    body: JSON.stringify(fullData)
                 });
                 document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
-            } catch(e) { document.getElementById('statusText').innerText = "⚠️ Error Sync"; }
+                showOk();
+            } catch(e) { document.getElementById('statusText').innerText = "⚠️ Sin Red"; }
         }
 
         function saveAppData(push = true) {
-            localStorage.setItem('alex_v21_config', JSON.stringify(config));
-            localStorage.setItem('alex_v21_data', JSON.stringify(bikes));
-            if(push && config.workshop) syncToCloud();
+            localStorage.setItem('alex_v10_config', JSON.stringify(config));
+            localStorage.setItem('alex_v10_data', JSON.stringify(bikes));
+            if(push && config.workshop) pushToCloud();
             renderBikes();
         }
 
-        // // Control de Inicio // //
+        // // Control Inicio // //
         window.addEventListener('load', () => {
             renderBikes();
             if(config.workshop) {
                 document.getElementById('workshopName').value = config.workshop;
-                syncToCloud();
+                pullFromCloud().then(() => renderBikes());
             }
             setTimeout(() => {
                 const splash = document.getElementById('splash');
                 splash.style.opacity = '0';
-                setTimeout(() => splash.style.display = 'none', 500);
-            }, 3000);
-        });
-
-        // // Core Logic // //
-        function calculateML(cat, size, width) {
-            let f = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);
-            let ml = width * f;
-            if (cat === 'Montaña') ml *= 1.25; if (cat === 'Gravel') ml *= 1.1; if (cat === 'Ruta') ml *= 0.95;
-            return Math.round(ml / 10) * 10;
-        }
-
-        function getDaysDiff(dateStr, months) {
-            const today = new Date(); today.setHours(0,0,0,0);
-            const nextDate = new Date(dateStr);
-            nextDate.setMonth(nextDate.getMonth() + parseInt(months));
-            return Math.ceil((nextDate - today) / 8.64e7);
-        }
-
-        // // UI Modals // //
-        function openBikeModal(index = -1) {
-            document.getElementById('tireWidth').innerHTML = config.widths.map(w => `<option value="${w}">${w} mm</option>`).join('');
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('editIndex').value = index;
-            if(index >= 0) {
-                const b = bikes[index];
-                document.getElementById('modalTitle').innerText = "EDITAR BICI";
-                document.getElementById('bikeName').value = b.name;
-                document.getElementById('bikeCategory').value = b.category;
-                document.getElementById('tireSize').value = b.size;
-                document.getElementById('tireWidth').value = b.width;
-                document.getElementById('liquidType').value = b.liquid;
-                document.getElementById('dateSellador').value = b.lastSellador;
-                document.getElementById('dateRelleno').value = b.lastRelleno;
-                document.getElementById('dateOverhaul').value = b.lastOverhaul;
-                document.getElementById('dateCadena').value = b.lastCadena;
-                document.getElementById('datePastillas').value = b.lastPastillas;
-                document.getElementById('dateBateria').value = b.lastBateria;
-                document.getElementById('checkOverhaul').checked = b.active.overhaul;
-                document.getElementById('checkCadena').checked = b.active.cadena;
-                document.getElementById('checkPastillas').checked = b.active.pastillas;
-                document.getElementById('checkBateria').checked = b.active.bateria;
-            } else {
-                document.getElementById('modalTitle').innerText = "Cargar Bici";
-                document.getElementById('bikeName').value = "";
-                document.getElementById('dateSellador').value = today; document.getElementById('dateRelleno').value = today;
-                document.getElementById('dateOverhaul').value = today; document.getElementById('dateCadena').value = today;
-                document.getElementById('datePastillas').value = today; document.getElementById('dateBateria').value = today;
-            }
-            document.getElementById('bikeModal').style.display = 'block';
-            updateMLSuggestions();
-        }
-
-        function saveBike() {
-            const idx = parseInt(document.getElementById('editIndex').value);
-            const today = new Date().toISOString().split('T')[0];
-            const data = {
-                name: document.getElementById('bikeName').value || "BICI SIN NOMBRE",
-                category: document.getElementById('bikeCategory').value,
-                size: document.getElementById('tireSize').value,
-                width: document.getElementById('tireWidth').value,
-                liquid: document.getElementById('liquidType').value,
-                lastSellador: document.getElementById('dateSellador').value,
-                lastRelleno: document.getElementById('dateRelleno').value,
-                lastOverhaul: document.getElementById('dateOverhaul').value,
-                lastCadena: document.getElementById('dateCadena').value,
-                lastPastillas: document.getElementById('datePastillas').value,
-                lastBateria: document.getElementById('dateBateria').value,
-                active: {
-                    overhaul: document.getElementById('checkOverhaul').checked,
-                    cadena: document.getElementById('checkCadena').checked,
-                    pastillas: document.getElementById('checkPastillas').checked,
-                    bateria: document.getElementById('checkBateria').checked
-                }
-            };
-            if(idx >= 0) bikes[idx] = data; else bikes.push(data);
-            saveAppData(); closeModal('bikeModal'); showOk();
-        }
-
-        function updateService(index, type) {
-            const today = new Date().toISOString().split('T')[0];
-            if(type === 'relleno') bikes[index].lastRelleno = today;
-            else if(type === 'sellador') { bikes[index].lastSellador = today; bikes[index].lastRelleno = today; }
-            else { bikes[index][`last${type.charAt(0).toUpperCase() + type.slice(1)}`] = today; }
-            saveAppData(); showOk();
-        }
-
-        function renderBikes() {
-            const container = document.getElementById('bikeList');
-            container.innerHTML = "";
-            const today = new Date(); today.setHours(0,0,0,0);
-            
-            bikes.forEach((bike, index) => {
-                const conf = bike.liquid === 'natural' ? {rell: config.freq.natRell, full: config.freq.natFull} : {rell: config.freq.sinRell, full: config.freq.sinFull};
-                const dSell = getDaysDiff(bike.lastSellador, conf.full);
-                const dRell = getDaysDiff(bike.lastRelleno, conf.rell);
-                const mlFull = calculateML(bike.category, bike.size, bike.width);
-
-                let rows = "";
-                if(bike.active.overhaul) rows += createRow("Overhaul", getDaysDiff(bike.lastOverhaul, config.freq.overhaul), 'overhaul', index);
-                if(bike.active.cadena) rows += createRow("Cadena", getDaysDiff(bike.lastCadena, config.freq.cadena), 'cadena', index);
-                if(bike.active.pastillas) rows += createRow("Pastillas", getDaysDiff(bike.lastPastillas, config.freq.pastillas), 'pastillas', index);
-                if(bike.active.bateria) rows += createRow("Batería", getDaysDiff(bike.lastBateria, config.freq.bateria), 'bateria', index);
-
-                container.innerHTML += `
-                    <div class="rounded-[2.5rem] shadow-xl p-6 bg-white ${dSell <= 0 || dRell <= 0 ? 'status-red' : 'status-green'}">
-                        <div class="flex justify-between items-start mb-4 border-b-2 pb-2 text-slate-900 leading-tight">
-                            <div><h3 class="text-3xl font-black uppercase italic">${bike.name}</h3><p class="text-[10px] font-black text-blue-700 uppercase">${bike.category} | ${bike.size} x ${bike.width}</p></div>
-                            <div class="flex gap-4"><button onclick="openBikeModal(${index})" class="text-3xl text-slate-300 hover:text-slate-900"><i class="fas fa-edit"></i></button><button onclick="if(confirm('¿Borrar?')){bikes.splice(${index},1);saveAppData();}" class="text-3xl text-red-100 hover:text-red-600"><i class="fas fa-trash"></i></button></div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="bg-blue-50 p-4 rounded-3xl border flex justify-between items-center text-slate-900">
-                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio Sellador</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
-                                <div class="text-right">
-                                    <p class="text-[10px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
-                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-4 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
-                                </div>
-                            </div>
-                            <div class="bg-blue-50 p-4 rounded-3xl border flex justify-between items-center text-slate-900">
-                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno Sellador</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
-                                <div class="text-right">
-                                    <p class="text-[10px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
-                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-4 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
-                                </div>
-                            </div>
-                            <div class="border-t pt-2 space-y-1">${rows}</div>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function createRow(label, days, type, index) {
-            return `<div class="flex justify-between items-center bg-white p-2 rounded-xl border border-slate-200 text-slate-900 leading-none">
-                <span class="text-[10px] font-black uppercase">${label}</span>
-                <div class="flex items-center gap-4">
-                    <span class="text-sm font-black ${days <= 0 ? 'text-red-600 animate-pulse' : ''}">${days}d</span>
-                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">HECHO</button>
-                </div>
-            </div>`;
-        }
-
-        function updateMLSuggestions() {
-            const ml = calculateML(document.getElementById('bikeCategory').value, document.getElementById('tireSize').value, document.getElementById('tireWidth').value);
-            document.getElementById('mlHint').innerText = `${ml} ML TOTAL`;
-        }
-
-        function saveFrequencies() {
-            config.freq = {
-                natRell: document.getElementById('freqNatRell').value, natFull: document.getElementById('freqNatFull').value,
-                sinRell: document.getElementById('freqSinRell').value, sinFull: document.getElementById('freqSinFull').value,
-                overhaul: document.getElementById('freqOverhaul').value, cadena: document.getElementById('freqCadena').value,
-                pastillas: document.getElementById('freqPastillas').value, bateria: document.getElementById('freqBateria').value
-            };
-            saveAppData(); showOk();
-        }
-
-        function openSettings() {
-            const f = config.freq;
-            document.getElementById('workshopName').value = config.workshop;
-            document.getElementById('freqNatRell').value = f.natRell; document.getElementById('freqNatFull').value = f.natFull;
-            document.getElementById('freqSinRell').value = f.sinRell; document.getElementById('freqSinFull').value = f.sinFull;
-            document.getElementById('freqOverhaul').value = f.overhaul; document.getElementById('freqCadena').value = f.cadena;
-            document.getElementById('freqPastillas').value = f.pastillas; document.getElementById('freqBateria').value = f.bateria;
-            renderWidthList();
-            document.getElementById('settingsModal').style.display = 'block';
-        }
-
-        function addWidth() {
-            const v = parseInt(document.getElementById('newWidth').value);
-            if(v && !config.widths.includes(v)) { config.widths.push(v); config.widths.sort((a,b)=>a-b); saveAppData(); renderWidthList(); document.getElementById('newWidth').value = ''; }
-        }
-
-        function renderWidthList() {
-            document.getElementById('widthList').innerHTML = config.widths.map(w => `<div class="bg-black text-white px-3 py-1 rounded-lg font-bold flex items-center gap-2 text-xs">${w}mm <button onclick="config.widths=config.widths.filter(x=>x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black">&times;</button></div>`).join('');
-        }
-
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        function showOk() { const t = document.getElementById('toast'); t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 2500); }
-    </script>
-</body>
-</html>
