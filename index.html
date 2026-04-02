@@ -3,34 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALEXANDER BIKES v23</title>
+    <title>ALEXANDER BIKES v24</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* // 1. ARRANQUE CRÍTICO // */
-        #splash {
-            position: fixed; inset: 0; background: #000; z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-            opacity: 1; visibility: visible;
-        }
-        /* Esta clase quita físicamente el bloqueo */
-        .splash-hidden { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-
-        /* // 2. INTERFAZ UI // */
+        /* // 1. ESTILOS UI // */
         html, body { overflow-x: hidden; width: 100%; margin: 0; padding: 0; background-color: #d1d5db; }
         .status-red { border: 6px solid #ef4444 !important; background-color: #fee2e2 !important; }
         .status-green { border: 6px solid #22c55e !important; background-color: #f0fdf4 !important; }
-        
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; overflow-y: auto; padding: 15px; }
-        input, select { border: 3px solid #cbd5e1 !important; padding: 12px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; font-size: 1.1rem; background: white !important; }
+        input, select { border: 3px solid #cbd5e1 !important; padding: 10px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; font-size: 1rem; background: white !important; }
         
         .text-ml-gigante { font-size: 2.8rem; font-weight: 900; color: #1e40af; line-height: 1; }
         .text-dias-gigante { font-size: 3.5rem; font-weight: 900; line-height: 1; color: #000; }
         
+        /* Splash Screen - Kill Switch CSS */
+        @keyframes fadeOut { 0% {opacity:1;} 90% {opacity:1;} 100% {opacity:0; visibility:hidden;} }
+        #splash { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: fadeOut 3s forwards; pointer-events: none; }
+        
         .control-label { display: flex; align-items: center; gap: 10px; justify-content: flex-start; width: 100%; cursor: pointer; padding: 5px 0; }
-        .control-label input { width: 24px !important; height: 24px !important; margin: 0 !important; flex-shrink: 0; cursor: pointer; }
+        .control-label input { width: 24px !important; height: 24px !important; margin: 0 !important; flex-shrink: 0; }
     </style>
 </head>
 <body class="text-slate-900 min-h-screen pb-32 font-sans px-4">
@@ -41,13 +34,10 @@
             ALEXANDER BIKES<br>
             <span class="text-blue-500 text-xl not-italic tracking-[0.3em]">BIENVENIDO</span>
         </h1>
-        <button onclick="hideSplash()" class="mt-12 text-slate-500 text-xs border border-slate-700 px-6 py-2 rounded-full uppercase tracking-widest font-bold">
-            Entrar Directo
-        </button>
     </div>
 
-    <!-- Notificación Toast -->
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-blue-900 text-white px-10 py-5 rounded-2xl shadow-2xl font-black z-[110] border-4 border-white text-xl text-center uppercase">
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 hidden bg-emerald-600 text-white px-10 py-5 rounded-2xl shadow-2xl font-black z-[110] border-4 border-white text-xl text-center uppercase">
         ✅ ACTUALIZADO
     </div>
 
@@ -57,14 +47,13 @@
             <div>
                 <h1 class="text-2xl md:text-4xl font-black italic tracking-tighter uppercase leading-none text-slate-800">
                     Alexander<span class="text-blue-600 italic">Bikes</span>
-                    <span class="text-[10px] font-normal text-slate-400 ml-1">v23</span>
+                    <span class="text-[10px] font-normal text-slate-400 ml-1">v24</span>
                 </h1>
-                <div id="cloudStatus" class="text-[10px] font-black uppercase text-slate-400 mt-2 italic flex items-center">
-                    <i class="fas fa-cloud mr-1"></i> <span id="statusText">Modo Local</span>
+                <div class="text-[10px] font-black uppercase text-slate-400 mt-2 italic leading-none">
+                    <i class="fas fa-warehouse mr-1"></i> Taller: <span id="currentWorkshopDisplay" class="text-blue-600">General</span>
                 </div>
             </div>
-            <!-- El engrane ahora tiene z-index alto para asegurar clic -->
-            <button onclick="openSettings()" class="relative z-10 w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-white shadow-xl hover:scale-105 active:scale-95 transition-all">
+            <button onclick="openSettings()" class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-white shadow-xl active:scale-90 transition-transform">
                 <i class="fas fa-cog"></i>
             </button>
         </header>
@@ -73,7 +62,7 @@
         <div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
         <!-- Botón + -->
-        <button onclick="openBikeModal()" class="fixed bottom-10 right-8 bg-blue-700 w-16 h-16 rounded-full shadow-2xl text-4xl flex items-center justify-center text-white border-4 border-white z-40 hover:scale-110 active:scale-90 transition-all">
+        <button onclick="openBikeModal()" class="fixed bottom-10 right-8 bg-blue-700 w-16 h-16 rounded-full shadow-2xl text-4xl flex items-center justify-center text-white border-4 border-white z-40">
             <i class="fas fa-plus"></i>
         </button>
     </div>
@@ -102,31 +91,31 @@
 
                     <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200">
                         <p class="text-[10px] font-black uppercase text-slate-500 mb-3 border-b pb-1 text-center font-black">Activar Controles</p>
-                        <div class="grid grid-cols-2 gap-y-1 gap-x-4">
-                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkOverhaul" checked> <span>Overhaul</span></label>
-                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkCadena" checked> <span>Cadena</span></label>
-                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkPastillas" checked> <span>Pastillas</span></label>
-                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkBateria" checked> <span>CR2032</span></label>
+                        <div class="grid grid-cols-2 gap-y-1 gap-x-4 text-slate-800">
+                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkOverhaul" checked> <span>Overhaul</span></label>
+                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkCadena" checked> <span>Cadena</span></label>
+                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkPastillas" checked> <span>Pastillas</span></label>
+                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkBateria" checked> <span>CR2032</span></label>
                         </div>
                     </div>
 
-                    <div class="bg-gray-100 p-4 rounded-2xl space-y-3">
-                        <p class="text-[10px] font-black text-slate-600 uppercase text-center italic border-b pb-1 font-black">Historial Manual de Fechas</p>
-                        <div class="grid grid-cols-2 gap-3 text-slate-900">
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Overhaul</label><input id="dateOverhaul" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Cadena</label><input id="dateCadena" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Pastillas</label><input id="datePastillas" type="date" class="text-[10px] p-1"></div>
-                            <div><label class="text-[8px] font-black uppercase text-slate-400">Batería</label><input id="dateBateria" type="date" class="text-[10px] p-1"></div>
+                    <div class="bg-gray-100 p-4 rounded-2xl space-y-3 text-slate-900 font-bold">
+                        <p class="text-[10px] font-black text-slate-600 uppercase text-center italic border-b pb-1">Historial Manual de Fechas</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Overhaul</label><input id="dateOverhaul" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Cadena</label><input id="dateCadena" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Pastillas</label><input id="datePastillas" type="date" class="text-[10px] p-1"></div>
+                            <div><label class="text-[8px] font-black uppercase text-slate-400 leading-none">Batería</label><input id="dateBateria" type="date" class="text-[10px] p-1"></div>
                         </div>
                     </div>
 
-                    <div id="mlHint" class="bg-blue-600 text-white p-3 rounded-xl text-center text-3xl font-black italic tracking-tighter"></div>
+                    <div id="mlHint" class="bg-blue-600 text-white p-3 rounded-xl text-center text-3xl font-black italic tracking-tighter leading-none"></div>
                     
                     <div class="flex gap-2">
                         <button onclick="closeModal('bikeModal')" class="flex-1 bg-slate-200 p-4 rounded-xl font-black uppercase text-xs text-slate-500">Cancelar</button>
-                        <button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-xs">Guardar Bici</button>
+                        <button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-xs">Guardar</button>
                     </div>
                     <input id="editIndex" type="hidden" value="-1">
                 </div>
@@ -138,33 +127,33 @@
     <div id="settingsModal" class="modal">
         <div class="flex items-center justify-center min-h-full p-2">
             <div class="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-lg border-4 border-slate-900 text-slate-900">
-                <h2 class="text-2xl font-black uppercase mb-4 border-b-4 border-black italic text-center">Ajustes Generales</h2>
+                <h2 class="text-2xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Gestión del Taller</h2>
+                
                 <div class="space-y-4">
-                    <!-- Sincronización -->
-                    <div class="bg-blue-600 p-4 rounded-2xl shadow-lg text-white">
-                        <label class="text-[11px] font-black uppercase mb-1 block text-blue-100 font-black">Nombre del Taller (Sincronización)</label>
+                    <!-- GESTOR DE TALLERES (LO NUEVO) -->
+                    <div class="bg-slate-800 p-4 rounded-2xl text-white shadow-lg">
+                        <label class="text-[10px] font-black uppercase mb-1 block text-slate-400">Crear o Cambiar Taller (Local)</label>
                         <div class="flex gap-2">
-                            <input id="workshopName" type="text" placeholder="Ej: Alexander_Taller" class="text-xs flex-1 text-slate-900 font-black uppercase bg-white">
-                            <button onclick="cloudSyncInit()" class="bg-slate-900 text-white px-4 rounded-xl font-black text-[10px] uppercase">CONECTAR</button>
+                            <input id="workshopInput" type="text" placeholder="NOMBRE DEL TALLER" class="text-xs flex-1 text-slate-900 font-black uppercase bg-white">
+                            <button onclick="switchWorkshop()" class="bg-blue-600 text-white px-4 rounded-xl font-black text-[10px] uppercase leading-none">CARGAR</button>
+                        </div>
+                        <div id="workshopList" class="mt-3 flex flex-wrap gap-2">
+                            <!-- Lista de talleres guardados -->
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3 font-bold text-slate-900">
-                        <div><label class="text-[9px] uppercase font-black">Nat. Relleno</label><input id="freqNatRell" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Nat. Cambio</label><input id="freqNatFull" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Sin. Relleno</label><input id="freqSinRell" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Sin. Cambio</label><input id="freqSinFull" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Overhaul</label><input id="freqOverhaul" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Cadena</label><input id="freqCadena" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Pastillas</label><input id="freqPastillas" type="number"></div>
-                        <div><label class="text-[9px] uppercase font-black">Batería</label><input id="freqBateria" type="number"></div>
+                        <div><label class="text-[9px] uppercase font-black">Nat. Relleno (m)</label><input id="freqNatRell" type="number"></div>
+                        <div><label class="text-[9px] uppercase font-black">Nat. Cambio (m)</label><input id="freqNatFull" type="number"></div>
+                        <div><label class="text-[9px] uppercase font-black">Overhaul (m)</label><input id="freqOverhaul" type="number"></div>
+                        <div><label class="text-[9px] uppercase font-black">Cadena (m)</label><input id="freqCadena" type="number"></div>
                     </div>
-                    <button onclick="saveFrequencies()" class="w-full bg-blue-600 text-white p-4 rounded-xl font-black uppercase text-xs shadow-lg">Guardar Tiempos</button>
+                    <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-4 rounded-xl font-black uppercase text-xs">Guardar Tiempos</button>
                     
-                    <div class="border-t pt-4">
-                        <h3 class="font-black text-slate-400 uppercase text-xs mb-2 italic">Llantas Disponibles (mm)</h3>
-                        <div class="flex gap-2 text-slate-900 font-black"><input id="newWidth" type="number" placeholder="MM" class="flex-1 bg-white border-2 border-slate-300 font-bold"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
-                        <div id="widthList" class="flex flex-wrap gap-2 py-2 text-slate-900"></div>
+                    <div class="border-t pt-2">
+                        <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic">Anchos Disponibles (mm)</h3>
+                        <div class="flex gap-2 text-slate-900 font-black"><input id="newWidth" type="number" placeholder="MM" class="flex-1 bg-white border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
+                        <div id="widthList" class="flex flex-wrap gap-1 py-1"></div>
                     </div>
                 </div>
                 <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 p-4 rounded-xl font-black mt-6 uppercase text-xs text-slate-500">Cerrar</button>
@@ -174,91 +163,59 @@
 
     <!-- // LÓGICA DE PROGRAMACIÓN (JS) // -->
     <script>
-        // // FUNCIONES DE ARRANQUE // //
-        function hideSplash() {
-            const sp = document.getElementById('splash');
-            if(sp) sp.classList.add('splash-hidden');
-        }
+        // // 1. MANEJO DE DATOS MULTITALLER // //
+        let currentWorkshop = localStorage.getItem('alex_current_workshop') || 'General';
+        let workshopList = JSON.parse(localStorage.getItem('alex_workshops_list')) || ['General'];
 
-        // Obligamos a quitar el Splash a los 3.5 segundos
-        setTimeout(hideSplash, 3500);
-
-        // MANEJO DE DATOS
-        let config = JSON.parse(localStorage.getItem('alex_v23_config')) || {
+        let config = JSON.parse(localStorage.getItem(`alex_config_${currentWorkshop}`)) || {
             widths: [25, 28, 30, 42, 45, 50, 55],
-            freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 },
-            workshop: ''
+            freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 }
         };
-        let bikes = JSON.parse(localStorage.getItem('alex_v23_data')) || [];
+        let bikes = JSON.parse(localStorage.getItem(`alex_data_${currentWorkshop}`)) || [];
 
-        const API_URL = "https://api.npoint.io/46908819058b7631742a";
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderBikes();
-            if(config.workshop) {
-                document.getElementById('statusText').innerText = "☁️ Sync...";
-                setTimeout(pullCloudSilent, 2000);
-            }
-        });
-
-        // // NUBE // //
-        async function cloudSyncInit() {
-            const name = document.getElementById('workshopName').value.trim().toLowerCase().replace(/[^a-z0-9]/g, '_');
-            if(!name) return alert("Escribe un nombre de taller");
-            config.workshop = name;
-            document.getElementById('statusText').innerText = "☁️ Buscando...";
-            try {
-                const res = await fetch(API_URL);
-                const cloudData = await res.json();
-                if(cloudData[name]) {
-                    if(confirm(`✅ Taller '${name}' encontrado. ¿Descargar datos?`)) {
-                        config = cloudData[name].config;
-                        bikes = cloudData[name].bikes;
-                        saveAppData(false);
-                        location.reload();
-                        return;
-                    }
-                }
-                alert(`✨ Taller nuevo: '${name}'.`);
-                saveAppData(true);
-            } catch(e) { alert("Error de conexión. Trabajando local."); }
-        }
-
-        async function pullCloudSilent() {
-            try {
-                const res = await fetch(API_URL);
-                const data = await res.json();
-                if(data[config.workshop]) {
-                    config = data[config.workshop].config;
-                    bikes = data[config.workshop].bikes;
-                    renderBikes();
-                    document.getElementById('statusText').innerText = "✅ Nube: " + config.workshop;
-                }
-            } catch(e) { document.getElementById('statusText').innerText = "⚠️ Offline"; }
-        }
-
-        async function syncToCloud() {
-            if(!config.workshop) return;
-            try {
-                const res = await fetch(API_URL);
-                let cloudData = await res.json();
-                cloudData[config.workshop] = { config, bikes };
-                await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(cloudData)
-                });
-            } catch(e) { console.warn("Sync falló"); }
-        }
-
-        function saveAppData(push = true) {
-            localStorage.setItem('alex_v23_config', JSON.stringify(config));
-            localStorage.setItem('alex_v23_data', JSON.stringify(bikes));
-            if(push && config.workshop) syncToCloud();
+        function saveAppData() {
+            localStorage.setItem('alex_current_workshop', currentWorkshop);
+            localStorage.setItem('alex_workshops_list', JSON.stringify(workshopList));
+            localStorage.setItem(`alex_config_${currentWorkshop}`, JSON.stringify(config));
+            localStorage.setItem(`alex_data_${currentWorkshop}`, JSON.stringify(bikes));
             renderBikes();
         }
 
-        // // CORE LOGIC // //
+        // // 2. GESTIÓN DE TALLERES // //
+        function switchWorkshop(name) {
+            const workshopName = name || document.getElementById('workshopInput').value.trim().replace(/\s+/g, '_');
+            if(!workshopName) return;
+            
+            currentWorkshop = workshopName;
+            if(!workshopList.includes(workshopName)) workshopList.push(workshopName);
+            
+            // Recargar datos del nuevo taller
+            config = JSON.parse(localStorage.getItem(`alex_config_${workshopName}`)) || {
+                widths: [25, 28, 30, 42, 45, 50, 55],
+                freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 6, cadena: 24, pastillas: 12, bateria: 18 }
+            };
+            bikes = JSON.parse(localStorage.getItem(`alex_data_${workshopName}`)) || [];
+            
+            saveAppData();
+            location.reload();
+        }
+
+        function renderWorkshopList() {
+            const container = document.getElementById('workshopList');
+            container.innerHTML = workshopList.map(w => `
+                <button onclick="switchWorkshop('${w}')" class="px-3 py-1 rounded-full text-[10px] font-black uppercase ${w === currentWorkshop ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-600'}">
+                    ${w.replace(/_/g, ' ')}
+                </button>
+            `).join('');
+        }
+
+        // // 3. ARRANQUE // //
+        window.onload = function() {
+            document.getElementById('currentWorkshopDisplay').innerText = currentWorkshop.replace(/_/g, ' ');
+            renderBikes();
+        };
+
+        // // 4. CORE LOGIC // //
         function calculateML(cat, size, width) {
             let f = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);
             let ml = width * f;
@@ -273,7 +230,7 @@
             return Math.ceil((nextDate - today) / 8.64e7);
         }
 
-        // // UI MODALS // //
+        // // 5. UI MODALS // //
         function openBikeModal(index = -1) {
             document.getElementById('tireWidth').innerHTML = config.widths.map(w => `<option value="${w}">${w} mm</option>`).join('');
             const today = new Date().toISOString().split('T')[0];
@@ -365,20 +322,17 @@
                         </div>
                         <div class="space-y-4">
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900 leading-none">
-                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1 leading-none">Cambio</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
-                                <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase leading-none">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
-                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">HECHO</button>
-                                </div>
+                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
+                                <div class="text-right"><p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p><button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">HECHO</button></div>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900 leading-none">
-                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1 leading-none">Relleno</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
+                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Relleno</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg">ml</span></p></div>
                                 <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase leading-none">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
                                     <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md uppercase">HECHO</button>
                                 </div>
                             </div>
-                            <div class="border-t pt-2 space-y-1">${rows}</div>
+                            <div class="border-t pt-2 space-y-1 font-bold">${rows}</div>
                         </div>
                     </div>`;
             });
@@ -411,12 +365,13 @@
 
         function openSettings() {
             const f = config.freq;
-            document.getElementById('workshopName').value = config.workshop;
+            document.getElementById('workshopInput').value = "";
             document.getElementById('freqNatRell').value = f.natRell; document.getElementById('freqNatFull').value = f.natFull;
             document.getElementById('freqSinRell').value = f.sinRell; document.getElementById('freqSinFull').value = f.sinFull;
             document.getElementById('freqOverhaul').value = f.overhaul; document.getElementById('freqCadena').value = f.cadena;
             document.getElementById('freqPastillas').value = f.pastillas; document.getElementById('freqBateria').value = f.bateria;
             renderWidthList();
+            renderWorkshopList();
             document.getElementById('settingsModal').style.display = 'block';
         }
 
@@ -426,7 +381,7 @@
         }
 
         function renderWidthList() {
-            document.getElementById('widthList').innerHTML = config.widths.map(w => `<div class="bg-black text-white px-3 py-1 rounded-lg font-bold flex items-center gap-2 text-xs text-slate-900">${w}mm <button onclick="config.widths=config.widths.filter(x=>x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black">&times;</button></div>`).join('');
+            document.getElementById('widthList').innerHTML = config.widths.map(w => `<div class="bg-black text-white px-3 py-1 rounded-lg font-bold flex items-center gap-2 text-xs">${w}mm <button onclick="config.widths=config.widths.filter(x=>x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black">&times;</button></div>`).join('');
         }
 
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
