@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALEXANDER BIKES v28</title>
+    <title>ALEXANDER BIKES v29</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -16,13 +16,10 @@
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; overflow-y: auto; padding: 20px; }
         input, select { border: 3px solid #cbd5e1 !important; padding: 10px; border-radius: 12px; width: 100%; color: #000 !important; font-weight: 800; font-size: 1rem; background: white !important; }
         
-        /* Tipografías Gigantes Simétricas */
         .text-ml-gigante { font-size: 2.8rem; font-weight: 900; color: #1e40af; line-height: 1; }
         .text-dias-gigante { font-size: 3.5rem; font-weight: 900; line-height: 1; color: #000; }
         
-        /* Splash Screen */
-        @keyframes fadeOut { 0% {opacity:1;} 90% {opacity:1;} 100% {opacity:0; visibility:hidden;} }
-        #splash { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: fadeOut 3s forwards; pointer-events: none; }
+        #splash { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
         
         .control-label { display: flex; align-items: center; gap: 10px; justify-content: flex-start; width: 100%; cursor: pointer; padding: 5px 0; }
         .control-label input { width: 24px !important; height: 24px !important; margin: 0 !important; flex-shrink: 0; }
@@ -42,26 +39,24 @@
     </div>
 
     <div class="max-w-[1600px] mx-auto">
-        <!-- // CABECERA CENTRADA // -->
         <header class="bg-white p-6 rounded-3xl shadow-lg my-6 border-b-4 border-blue-600 relative">
-            <div class="flex justify-between items-center mb-4">
-                <h1 class="text-xl md:text-3xl font-black italic tracking-tighter uppercase leading-none text-slate-800">
+            <div class="flex justify-between items-center mb-4 text-slate-900 font-black">
+                <h1 class="text-xl md:text-3xl font-black italic tracking-tighter uppercase leading-none">
                     Alexander<span class="text-blue-600 italic">Bikes</span>
-                    <span class="text-[10px] font-normal text-slate-400 ml-1">v28</span>
+                    <span class="text-[10px] font-normal text-slate-400 ml-1">v29</span>
                 </h1>
                 <button onclick="openSettings()" class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-3xl text-white shadow-xl active:scale-90 transition-transform">
                     <i class="fas fa-cog"></i>
                 </button>
             </div>
-            <div class="w-full text-center border-t border-slate-100 pt-3">
-                <div class="text-[12px] font-black uppercase text-slate-400 italic tracking-widest">
-                    <i class="fas fa-warehouse text-blue-600 mr-1"></i> TALLER ACTUAL: 
-                    <span id="currentWorkshopDisplay" class="text-blue-700 text-sm ml-1">General</span>
+            <div class="w-full text-center border-t border-slate-100 pt-3 text-slate-900 font-black">
+                <div class="text-[12px] font-black uppercase text-slate-400 italic tracking-widest leading-none">
+                    <i class="fas fa-warehouse text-blue-600 mr-1 leading-none"></i> TALLER ACTUAL: 
+                    <span id="currentWorkshopDisplay" class="text-blue-700 text-sm ml-1 leading-none">General</span>
                 </div>
             </div>
         </header>
 
-        <!-- GRID 4 COLUMNAS -->
         <div id="bikeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
 
         <button onclick="openBikeModal()" class="fixed bottom-10 right-8 bg-blue-700 w-16 h-16 rounded-full shadow-2xl text-4xl flex items-center justify-center text-white border-4 border-white z-50 active:scale-90 transition-all font-black">
@@ -76,7 +71,7 @@
                 <h2 id="modalTitle" class="text-2xl font-black uppercase mb-4 text-center italic border-b-4 pb-2">Cargar Bici</h2>
                 <div class="space-y-4">
                     <input id="bikeName" type="text" placeholder="NOMBRE DE LA BICI" class="uppercase">
-                    <div class="grid grid-cols-2 gap-3 text-slate-900">
+                    <div class="grid grid-cols-2 gap-3">
                         <select id="bikeCategory" onchange="updateMLSuggestions()">
                             <option value="Ruta">RUTA</option><option value="Gravel">GRAVEL</option><option value="Montaña" selected>MONTAÑA</option>
                         </select>
@@ -90,20 +85,18 @@
                             <option value="natural">L. NATURAL</option><option value="sintetico">L. SINTÉTICO</option>
                         </select>
                     </div>
-
                     <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200">
                         <p class="text-[10px] font-black uppercase text-slate-500 mb-3 border-b pb-1 text-center font-black">Activar Controles</p>
-                        <div class="grid grid-cols-2 gap-y-1 gap-x-4 text-slate-800">
-                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkOverhaul" checked> <span>Overhaul</span></label>
-                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkCadena" checked> <span>Cadena</span></label>
-                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkPastillas" checked> <span>Pastillas</span></label>
-                            <label class="control-label text-xs font-black"><input type="checkbox" id="checkBateria" checked> <span>CR2032</span></label>
+                        <div class="grid grid-cols-2 gap-y-1 gap-x-4">
+                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkOverhaul" checked> <span>Overhaul</span></label>
+                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkCadena" checked> <span>Cadena</span></label>
+                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkPastillas" checked> <span>Pastillas</span></label>
+                            <label class="control-label text-xs font-black text-slate-700"><input type="checkbox" id="checkBateria" checked> <span>CR2032</span></label>
                         </div>
                     </div>
-
-                    <div class="bg-gray-100 p-4 rounded-2xl space-y-3">
-                        <p class="text-[10px] font-black text-slate-600 uppercase text-center italic border-b pb-1">Fechas Manuales</p>
-                        <div class="grid grid-cols-2 gap-3 text-slate-900">
+                    <div class="bg-gray-100 p-4 rounded-2xl space-y-3 font-black">
+                        <p class="text-[10px] font-black text-slate-600 uppercase text-center italic border-b pb-1 font-black">Fechas Manuales</p>
+                        <div class="grid grid-cols-2 gap-3 text-slate-900 font-bold">
                             <div><label class="text-[8px] font-black uppercase text-slate-400">Sellador Cambio</label><input id="dateSellador" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[8px] font-black uppercase text-slate-400">Sellador Relleno</label><input id="dateRelleno" type="date" class="text-[10px] p-1"></div>
                             <div><label class="text-[8px] font-black uppercase text-slate-400">Overhaul</label><input id="dateOverhaul" type="date" class="text-[10px] p-1"></div>
@@ -112,11 +105,10 @@
                             <div><label class="text-[8px] font-black uppercase text-slate-400">Batería</label><input id="dateBateria" type="date" class="text-[10px] p-1"></div>
                         </div>
                     </div>
-
-                    <div id="mlHint" class="bg-blue-600 text-white p-3 rounded-xl text-center text-3xl font-black italic tracking-tighter leading-none"></div>
+                    <div id="mlHint" class="bg-blue-600 text-white p-3 rounded-xl text-center text-3xl font-black italic tracking-tighter"></div>
                     <div class="flex gap-2">
                         <button onclick="closeModal('bikeModal')" class="flex-1 bg-slate-200 p-4 rounded-xl font-black uppercase text-xs text-slate-500">Cancelar</button>
-                        <button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-xs">Guardar</button>
+                        <button onclick="saveBike()" class="flex-1 bg-slate-900 text-white p-4 rounded-xl font-black shadow-xl uppercase text-xs font-black">Guardar</button>
                     </div>
                     <input id="editIndex" type="hidden" value="-1">
                 </div>
@@ -129,26 +121,20 @@
         <div class="flex items-center justify-center min-h-full p-2 text-slate-900 font-bold">
             <div class="bg-white p-8 rounded-[3rem] shadow-2xl w-full max-w-lg border-4 border-slate-900">
                 <h2 class="text-xl font-black uppercase mb-4 border-b-4 border-black text-center italic">Gestión de Talleres</h2>
-                
                 <div class="space-y-4">
-                    <!-- GESTOR DE TALLERES -->
                     <div class="bg-slate-800 p-4 rounded-2xl text-white shadow-lg">
-                        <label class="text-[10px] font-black uppercase mb-1 block text-slate-400 font-black">Cambiar Taller Actual</label>
-                        <div class="flex gap-2">
-                            <input id="workshopInput" type="text" placeholder="NOMBRE DEL TALLER" class="text-xs flex-1 text-slate-900 font-black uppercase bg-white">
-                            <button onclick="switchWorkshop()" class="bg-blue-600 text-white px-4 rounded-xl font-black text-[10px] uppercase shadow-md">CARGAR</button>
+                        <label class="text-[10px] font-black uppercase mb-1 block text-slate-400">Cambiar Taller Actual</label>
+                        <div class="flex gap-2 font-black text-slate-900">
+                            <input id="workshopInput" type="text" placeholder="NOMBRE DEL TALLER" class="text-xs flex-1 uppercase">
+                            <button onclick="switchWorkshop()" class="bg-blue-600 text-white px-4 rounded-xl font-black text-[10px] uppercase">CARGAR</button>
                         </div>
-                        <div id="workshopList" class="mt-4 flex flex-wrap gap-2"></div>
+                        <div id="workshopList" class="mt-4 flex flex-wrap gap-2 font-black"></div>
                     </div>
-
-                    <!-- BOTONES DE RESPALDO (EXPORTAR/IMPORTAR) -->
-                    <div class="grid grid-cols-2 gap-2 border-t border-slate-100 pt-4">
-                        <button onclick="exportAllWorkshops()" class="bg-emerald-600 text-white p-3 rounded-xl font-black text-[10px] uppercase shadow-md"><i class="fas fa-file-export mr-1"></i> Exportar a Disco</button>
-                        <button onclick="document.getElementById('importInput').click()" class="bg-amber-600 text-white p-3 rounded-xl font-black text-[10px] uppercase shadow-md"><i class="fas fa-file-import mr-1"></i> Importar de Disco</button>
+                    <div class="grid grid-cols-2 gap-2 border-t pt-4">
+                        <button onclick="exportAllWorkshops()" class="bg-emerald-600 text-white p-3 rounded-xl font-black text-[10px] uppercase shadow-md font-black">Exportar a Disco</button>
+                        <button onclick="document.getElementById('importInput').click()" class="bg-amber-600 text-white p-3 rounded-xl font-black text-[10px] uppercase shadow-md font-black">Importar de Disco</button>
                         <input type="file" id="importInput" class="hidden" accept=".json" onchange="importAllWorkshops(event)">
                     </div>
-
-                    <!-- FRECUENCIAS (SINTÉTICO RESTAURADO) -->
                     <div class="grid grid-cols-2 gap-3 text-slate-900 font-black">
                         <div><label class="text-[9px] uppercase font-black">Nat. Relleno (m)</label><input id="freqNatRell" type="number"></div>
                         <div><label class="text-[9px] uppercase font-black">Nat. Cambio (m)</label><input id="freqNatFull" type="number"></div>
@@ -159,76 +145,58 @@
                         <div><label class="text-[9px] uppercase font-black">Pastillas (m)</label><input id="freqPastillas" type="number"></div>
                         <div><label class="text-[9px] uppercase font-black">Batería (m)</label><input id="freqBateria" type="number"></div>
                     </div>
-                    <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-4 rounded-xl font-black uppercase text-xs">Guardar Tiempos</button>
-                    
-                    <!-- GESTIÓN LLANTAS -->
-                    <div class="border-t border-slate-100 pt-2">
+                    <button onclick="saveFrequencies()" class="w-full bg-slate-900 text-white p-4 rounded-xl font-black uppercase text-xs font-black">Guardar Tiempos</button>
+                    <div class="border-t pt-2">
                         <h3 class="font-black text-slate-400 uppercase text-[10px] mb-2 italic text-center">Gestión Llantas (mm)</h3>
-                        <div class="flex gap-2 font-black"><input id="newWidth" type="number" placeholder="MM" class="flex-1 bg-white border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
-                        <div id="widthList" class="flex flex-wrap gap-1 py-1"></div>
+                        <div class="flex gap-2"><input id="newWidth" type="number" placeholder="MM" class="flex-1 bg-white border-2 border-slate-300 font-black"><button onclick="addWidth()" class="bg-black text-white px-6 rounded-xl font-black text-xl">+</button></div>
+                        <div id="widthList" class="flex flex-wrap gap-1 py-1 font-black"></div>
                     </div>
                 </div>
-                <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 p-4 rounded-xl font-black mt-6 uppercase text-xs text-slate-500">Cerrar</button>
+                <button onclick="closeModal('settingsModal')" class="w-full bg-slate-100 p-4 rounded-xl font-black mt-6 uppercase text-xs text-slate-500 font-black">Cerrar</button>
             </div>
         </div>
     </div>
 
     <!-- // LÓGICA DE PROGRAMACIÓN // -->
     <script>
-        // // 1. MANEJO DE DATOS MULTITALLER // //
         let currentWorkshop = localStorage.getItem('alex_ws_curr') || 'General';
         let workshopList = JSON.parse(localStorage.getItem('alex_ws_list')) || ['General'];
-
-        // Configuración por defecto según tus indicaciones
-        const defaultConfig = {
-            widths: [25, 28, 30, 40, 45, 50, 55], // 42 eliminado, 40 estándar
-            freq: { 
-                natRell: 3, natFull: 8, 
-                sinRell: 5, sinFull: 12, 
-                overhaul: 12, cadena: 24, pastillas: 18, bateria: 18 
-            }
-        };
-
+        const defaultConfig = { widths: [25, 28, 30, 40, 45, 50, 55], freq: { natRell: 3, natFull: 8, sinRell: 5, sinFull: 12, overhaul: 12, cadena: 24, pastillas: 18, bateria: 18 } };
         let config = JSON.parse(localStorage.getItem(`alex_cfg_${currentWorkshop}`)) || JSON.parse(JSON.stringify(defaultConfig));
         let bikes = JSON.parse(localStorage.getItem(`alex_db_${currentWorkshop}`)) || [];
 
-        // Limpiador forzado de llanta 42mm
-        if(config.widths.includes(42)) {
-            config.widths = config.widths.filter(w => w !== 42);
-            if(!config.widths.includes(40)) config.widths.push(40);
-            config.widths.sort((a,b)=>a-b);
+        window.onload = function() { renderBikes(); document.getElementById('currentWorkshopDisplay').innerText = currentWorkshop.replace(/_/g, ' '); setTimeout(() => { const s = document.getElementById('splash'); if(s){s.style.opacity='0'; setTimeout(()=>s.style.display='none',600);} }, 3000); };
+
+        // // SISTEMA DE CONFIRMACIÓN Y ACTUALIZACIÓN // //
+        function updateService(index, type) {
+            const labels = { 'sellador': 'CAMBIO DE SELLADOR', 'relleno': 'RELLENO DE SELLADOR', 'overhaul': 'SERVICIO GENERAL (OVERHAUL)', 'cadena': 'CAMBIO DE CADENA', 'pastillas': 'CAMBIO DE PASTILLAS', 'bateria': 'CAMBIO DE BATERÍAS' };
+            const today = new Date().toISOString().split('T')[0];
+            const label = labels[type] || 'SERVICIO';
+
+            if(confirm(`⚠️ ¿Confirmas que realizaste el "${label}" hoy?`)) {
+                if(type === 'relleno') bikes[index].lastRelleno = today;
+                else if(type === 'sellador') { bikes[index].lastSellador = today; bikes[index].lastRelleno = today; }
+                else { bikes[index][`last${type.charAt(0).toUpperCase() + type.slice(1)}`] = today; }
+                saveAppData();
+                showOk();
+            }
         }
 
-        window.onload = function() {
-            renderBikes();
-            document.getElementById('currentWorkshopDisplay').innerText = currentWorkshop.replace(/_/g, ' ');
-        };
-
-        // // 2. BACKUP TOTAL // //
         function exportAllWorkshops() {
             const allData = {};
-            for(let i=0; i<localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if(key.startsWith('alex_')) allData[key] = localStorage.getItem(key);
-            }
+            for(let i=0; i<localStorage.length; i++){ const k = localStorage.key(i); if(k.startsWith('alex_')) allData[k] = localStorage.getItem(k); }
             const blob = new Blob([JSON.stringify(allData)], {type: 'application/json'});
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `Alexander_Bikes_Backup_${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `Alexander_Bikes_Backup_${new Date().toISOString().split('T')[0]}.json`; a.click();
         }
 
         function importAllWorkshops(event) {
-            const file = event.target.files[0];
-            if(!file) return;
+            const file = event.target.files[0]; if(!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     const data = JSON.parse(e.target.result);
                     if(confirm("⚠️ ¿IMPORTAR TODO? Esto reemplazará tus talleres actuales.")) {
-                        for(let i=localStorage.length-1; i>=0; i--) {
-                            if(localStorage.key(i).startsWith('alex_')) localStorage.removeItem(localStorage.key(i));
-                        }
+                        for(let i=localStorage.length-1; i>=0; i--){ if(localStorage.key(i).startsWith('alex_')) localStorage.removeItem(localStorage.key(i)); }
                         for(const key in data) localStorage.setItem(key, data[key]);
                         location.reload();
                     }
@@ -237,14 +205,11 @@
             reader.readAsText(file);
         }
 
-        // // 3. GESTIÓN TALLERES // //
         function switchWorkshop(name) {
-            const workshopName = name || document.getElementById('workshopInput').value.trim().replace(/\s+/g, '_');
-            if(!workshopName) return;
-            currentWorkshop = workshopName;
-            if(!workshopList.includes(workshopName)) workshopList.push(workshopName);
-            localStorage.setItem('alex_ws_curr', currentWorkshop);
-            localStorage.setItem('alex_ws_list', JSON.stringify(workshopList));
+            const wsName = name || document.getElementById('workshopInput').value.trim().replace(/\s+/g, '_');
+            if(!wsName) return;
+            currentWorkshop = wsName; if(!workshopList.includes(wsName)) workshopList.push(wsName);
+            localStorage.setItem('alex_ws_curr', currentWorkshop); localStorage.setItem('alex_ws_list', JSON.stringify(workshopList));
             location.reload();
         }
 
@@ -252,8 +217,7 @@
             if(name === 'General') return alert("No puedes borrar el taller base.");
             if(confirm(`⚠️ ¿Borrar taller "${name.replace(/_/g, ' ')}"?`)) {
                 workshopList = workshopList.filter(w => w !== name);
-                localStorage.removeItem(`alex_cfg_${name}`);
-                localStorage.removeItem(`alex_db_${name}`);
+                localStorage.removeItem(`alex_cfg_${name}`); localStorage.removeItem(`alex_db_${name}`);
                 if(currentWorkshop === name) localStorage.setItem('alex_ws_curr', 'General');
                 localStorage.setItem('alex_ws_list', JSON.stringify(workshopList));
                 location.reload();
@@ -263,7 +227,7 @@
         function renderWorkshopList() {
             const container = document.getElementById('workshopList');
             container.innerHTML = workshopList.map(w => `
-                <div class="flex items-center bg-white rounded-xl pl-3 pr-1 py-1 gap-2 border border-slate-700 shadow-sm font-black">
+                <div class="flex items-center bg-white rounded-xl pl-3 pr-1 py-1 gap-2 border border-slate-700 shadow-sm">
                     <button onclick="switchWorkshop('${w}')" class="text-[10px] font-black uppercase ${w === currentWorkshop ? 'text-blue-600' : 'text-slate-900'}">${w.replace(/_/g, ' ')}</button>
                     ${w !== 'General' ? `<button onclick="deleteWorkshop('${w}')" class="text-red-500 font-black text-sm px-2">×</button>` : ''}
                 </div>`).join('');
@@ -275,7 +239,6 @@
             renderBikes();
         }
 
-        // // 4. CORE LOGIC // //
         function calculateML(cat, size, width) {
             let f = (size === '700c' || size === '29"') ? 2.1 : (size === '26"' ? 1.8 : 2.4);
             let ml = width * f;
@@ -285,89 +248,36 @@
 
         function getDaysDiff(dateStr, months) {
             const today = new Date(); today.setHours(0,0,0,0);
-            const nextDate = new Date(dateStr);
-            nextDate.setMonth(nextDate.getMonth() + parseInt(months));
+            const nextDate = new Date(dateStr); nextDate.setMonth(nextDate.getMonth() + parseInt(months));
             return Math.ceil((nextDate - today) / 8.64e7);
         }
 
-        // // 5. UI MODALS // //
         function openBikeModal(index = -1) {
             document.getElementById('tireWidth').innerHTML = config.widths.map(w => `<option value="${w}">${w} mm</option>`).join('');
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('editIndex').value = index;
             if(index >= 0) {
-                const b = bikes[index];
-                document.getElementById('modalTitle').innerText = "EDITAR BICI";
-                document.getElementById('bikeName').value = b.name;
-                document.getElementById('bikeCategory').value = b.category;
-                document.getElementById('tireSize').value = b.size;
-                document.getElementById('tireWidth').value = b.width;
-                document.getElementById('liquidType').value = b.liquid;
-                document.getElementById('dateSellador').value = b.lastSellador;
-                document.getElementById('dateRelleno').value = b.lastRelleno;
-                document.getElementById('dateOverhaul').value = b.lastOverhaul;
-                document.getElementById('dateCadena').value = b.lastCadena;
-                document.getElementById('datePastillas').value = b.lastPastillas;
-                document.getElementById('dateBateria').value = b.lastBateria;
-                document.getElementById('checkOverhaul').checked = b.active.overhaul;
-                document.getElementById('checkCadena').checked = b.active.cadena;
-                document.getElementById('checkPastillas').checked = b.active.pastillas;
-                document.getElementById('checkBateria').checked = b.active.bateria;
+                const b = bikes[index]; document.getElementById('modalTitle').innerText = "EDITAR BICI"; document.getElementById('bikeName').value = b.name; document.getElementById('bikeCategory').value = b.category; document.getElementById('tireSize').value = b.size; document.getElementById('tireWidth').value = b.width; document.getElementById('liquidType').value = b.liquid; document.getElementById('dateSellador').value = b.lastSellador; document.getElementById('dateRelleno').value = b.lastRelleno; document.getElementById('dateOverhaul').value = b.lastOverhaul; document.getElementById('dateCadena').value = b.lastCadena; document.getElementById('datePastillas').value = b.lastPastillas; document.getElementById('dateBateria').value = b.lastBateria; document.getElementById('checkOverhaul').checked = b.active.overhaul; document.getElementById('checkCadena').checked = b.active.cadena; document.getElementById('checkPastillas').checked = b.active.pastillas; document.getElementById('checkBateria').checked = b.active.bateria;
             } else {
-                document.getElementById('modalTitle').innerText = "Cargar Bici";
-                document.getElementById('bikeName').value = "";
-                document.getElementById('dateSellador').value = today; document.getElementById('dateRelleno').value = today;
-                document.getElementById('dateOverhaul').value = today; document.getElementById('dateCadena').value = today;
-                document.getElementById('datePastillas').value = today; document.getElementById('dateBateria').value = today;
+                document.getElementById('modalTitle').innerText = "Cargar Bici"; document.getElementById('bikeName').value = ""; document.getElementById('dateSellador').value = today; document.getElementById('dateRelleno').value = today; document.getElementById('dateOverhaul').value = today; document.getElementById('dateCadena').value = today; document.getElementById('datePastillas').value = today; document.getElementById('dateBateria').value = today;
             }
-            document.getElementById('bikeModal').style.display = 'block';
-            updateMLSuggestions();
+            document.getElementById('bikeModal').style.display = 'block'; updateMLSuggestions();
         }
 
         function saveBike() {
             const idx = parseInt(document.getElementById('editIndex').value);
-            const today = new Date().toISOString().split('T')[0];
             const data = {
-                name: document.getElementById('bikeName').value || "SIN NOMBRE",
-                category: document.getElementById('bikeCategory').value,
-                size: document.getElementById('tireSize').value,
-                width: document.getElementById('tireWidth').value,
-                liquid: document.getElementById('liquidType').value,
-                lastSellador: document.getElementById('dateSellador').value,
-                lastRelleno: document.getElementById('dateRelleno').value,
-                lastOverhaul: document.getElementById('dateOverhaul').value,
-                lastCadena: document.getElementById('dateCadena').value,
-                lastPastillas: document.getElementById('datePastillas').value,
-                lastBateria: document.getElementById('dateBateria').value,
-                active: { overhaul: document.getElementById('checkOverhaul').checked, cadena: document.getElementById('checkCadena').checked, pastillas: document.getElementById('checkPastillas').checked, bateria: document.getElementById('checkBateria').checked }
+                name: document.getElementById('bikeName').value || "BICI", category: document.getElementById('bikeCategory').value, size: document.getElementById('tireSize').value, width: document.getElementById('tireWidth').value, liquid: document.getElementById('liquidType').value, lastSellador: document.getElementById('dateSellador').value, lastRelleno: document.getElementById('dateRelleno').value, lastOverhaul: document.getElementById('dateOverhaul').value, lastCadena: document.getElementById('dateCadena').value, lastPastillas: document.getElementById('datePastillas').value, lastBateria: document.getElementById('dateBateria').value, active: { overhaul: document.getElementById('checkOverhaul').checked, cadena: document.getElementById('checkCadena').checked, pastillas: document.getElementById('checkPastillas').checked, bateria: document.getElementById('checkBateria').checked }
             };
-            if(idx >= 0) bikes[idx] = data; else bikes.push(data);
-            saveAppData(); closeModal('bikeModal'); showOk();
-        }
-
-        function updateService(index, type) {
-            const today = new Date().toISOString().split('T')[0];
-            if(type === 'relleno') bikes[index].lastRelleno = today;
-            else if(type === 'sellador') { bikes[index].lastSellador = today; bikes[index].lastRelleno = today; }
-            else { bikes[index][`last${type.charAt(0).toUpperCase() + type.slice(1)}`] = today; }
-            saveAppData(); showOk();
+            if(idx >= 0) bikes[idx] = data; else bikes.push(data); saveAppData(); closeModal('bikeModal'); showOk();
         }
 
         function renderBikes() {
-            const container = document.getElementById('bikeList');
-            container.innerHTML = "";
-            const today = new Date(); today.setHours(0,0,0,0);
+            const container = document.getElementById('bikeList'); container.innerHTML = ""; const today = new Date(); today.setHours(0,0,0,0);
             bikes.forEach((bike, index) => {
                 const conf = bike.liquid === 'natural' ? {rell: config.freq.natRell, full: config.freq.natFull} : {rell: config.freq.sinRell, full: config.freq.sinFull};
-                const dSell = getDaysDiff(bike.lastSellador, conf.full);
-                const dRell = getDaysDiff(bike.lastRelleno, conf.rell);
-                const mlFull = calculateML(bike.category, bike.size, bike.width);
-                let rows = "";
-                if(bike.active.overhaul) rows += createRow("Overhaul", getDaysDiff(bike.lastOverhaul, config.freq.overhaul), 'overhaul', index);
-                if(bike.active.cadena) rows += createRow("Cadena", getDaysDiff(bike.lastCadena, config.freq.cadena), 'cadena', index);
-                if(bike.active.pastillas) rows += createRow("Pastillas", getDaysDiff(bike.lastPastillas, config.freq.pastillas), 'pastillas', index);
-                if(bike.active.bateria) rows += createRow("Batería", getDaysDiff(bike.lastBateria, config.freq.bateria), 'bateria', index);
-
+                const dSell = getDaysDiff(bike.lastSellador, conf.full); const dRell = getDaysDiff(bike.lastRelleno, conf.rell); const mlFull = calculateML(bike.category, bike.size, bike.width);
+                let rows = ""; if(bike.active.overhaul) rows += createRow("Overhaul", getDaysDiff(bike.lastOverhaul, config.freq.overhaul), 'overhaul', index); if(bike.active.cadena) rows += createRow("Cadena", getDaysDiff(bike.lastCadena, config.freq.cadena), 'cadena', index); if(bike.active.pastillas) rows += createRow("Pastillas", getDaysDiff(bike.lastPastillas, config.freq.pastillas), 'pastillas', index); if(bike.active.bateria) rows += createRow("Batería", getDaysDiff(bike.lastBateria, config.freq.bateria), 'bateria', index);
                 container.innerHTML += `
                     <div class="rounded-[2.5rem] shadow-xl p-6 bg-white ${dSell <= 0 || dRell <= 0 ? 'status-red' : 'status-green'}">
                         <div class="flex justify-between items-start mb-4 border-b-2 pb-2 text-slate-900 leading-tight font-black uppercase tracking-tighter">
@@ -375,18 +285,18 @@
                             <div class="flex gap-4"><button onclick="openBikeModal(${index})" class="text-3xl text-slate-300 hover:text-slate-900"><i class="fas fa-edit"></i></button><button onclick="if(confirm('¿Borrar?')){bikes.splice(${index},1);saveAppData();}" class="text-3xl text-red-100 hover:text-red-600"><i class="fas fa-trash"></i></button></div>
                         </div>
                         <div class="space-y-4 font-black">
-                            <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900 leading-none">
-                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1">Cambio</p><p class="text-ml-gigante">${mlFull}<span class="text-lg">ml</span></p></div>
+                            <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900 leading-none font-black">
+                                <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1 font-black">Cambio</p><p class="text-ml-gigante">${mlFull}<span class="text-lg font-black">ml</span></p></div>
                                 <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
-                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md">HECHO</button>
+                                    <p class="text-[9px] font-black text-slate-400 font-black uppercase">Faltan</p><p class="text-dias-gigante ${dSell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dSell}d</p>
+                                    <button onclick="updateService(${index}, 'sellador')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md font-black">HECHO</button>
                                 </div>
                             </div>
                             <div class="bg-blue-50 p-4 rounded-3xl border-2 border-blue-100 flex justify-between items-center text-slate-900 leading-none">
                                 <div><p class="text-[9px] font-black uppercase text-blue-800 mb-1 font-black">Relleno</p><p class="text-ml-gigante">${Math.round(mlFull/2/10)*10}<span class="text-lg font-black">ml</span></p></div>
                                 <div class="text-right">
-                                    <p class="text-[9px] font-black text-slate-400 uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
-                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md font-black">HECHO</button>
+                                    <p class="text-[9px] font-black text-slate-400 font-black uppercase">Faltan</p><p class="text-dias-gigante ${dRell <= 0 ? 'text-red-600 animate-pulse' : ''}">${dRell}d</p>
+                                    <button onclick="updateService(${index}, 'relleno')" class="mt-2 bg-emerald-500 text-white px-6 py-2 rounded-xl font-black uppercase text-[10px] shadow-md font-black font-black">HECHO</button>
                                 </div>
                             </div>
                             <div class="border-t pt-2 space-y-1">${rows}</div>
@@ -394,47 +304,11 @@
             });
         }
 
-        function createRow(label, days, type, index) {
-            return `<div class="flex justify-between items-center bg-white p-2 rounded-xl border border-slate-200 text-slate-900 leading-none font-bold">
-                <span class="text-[11px] font-black uppercase text-slate-600 font-black">${label}</span>
-                <div class="flex items-center gap-4">
-                    <span class="text-sm font-black ${days <= 0 ? 'text-red-600 animate-pulse' : ''}">${days}d</span>
-                    <button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm">HECHO</button>
-                </div>
-            </div>`;
-        }
-
-        function updateMLSuggestions() {
-            const ml = calculateML(document.getElementById('bikeCategory').value, document.getElementById('tireSize').value, document.getElementById('tireWidth').value);
-            document.getElementById('mlHint').innerText = `${ml} ML TOTAL`;
-        }
-
-        function saveFrequencies() {
-            config.freq = {
-                natRell: document.getElementById('freqNatRell').value, natFull: document.getElementById('freqNatFull').value,
-                sinRell: document.getElementById('freqSinRell').value, sinFull: document.getElementById('freqSinFull').value,
-                overhaul: document.getElementById('freqOverhaul').value, cadena: document.getElementById('freqCadena').value,
-                pastillas: document.getElementById('freqPastillas').value, bateria: document.getElementById('freqBateria').value
-            };
-            saveAppData(); showOk();
-        }
-
-        function openSettings() {
-            const f = config.freq;
-            document.getElementById('workshopInput').value = "";
-            document.getElementById('freqNatRell').value = f.natRell; document.getElementById('freqNatFull').value = f.natFull;
-            document.getElementById('freqSinRell').value = f.sinRell; document.getElementById('freqSinFull').value = f.sinFull;
-            document.getElementById('freqOverhaul').value = f.overhaul; document.getElementById('freqCadena').value = f.cadena;
-            document.getElementById('freqPastillas').value = f.pastillas; document.getElementById('freqBateria').value = f.bateria;
-            renderWidthList(); renderWorkshopList();
-            document.getElementById('settingsModal').style.display = 'block';
-        }
-
-        function addWidth() {
-            const v = parseInt(document.getElementById('newWidth').value);
-            if(v && !config.widths.includes(v)) { config.widths.push(v); config.widths.sort((a,b)=>a-b); saveAppData(); renderWidthList(); document.getElementById('newWidth').value = ''; }
-        }
-
+        function createRow(label, days, type, index) { return `<div class="flex justify-between items-center bg-white p-2 rounded-xl border border-slate-200 text-slate-900 leading-none font-bold"><span class="text-[11px] font-black uppercase text-slate-600 font-black">${label}</span><div class="flex items-center gap-4"><span class="text-sm font-black ${days <= 0 ? 'text-red-600 animate-pulse' : ''}">${days}d</span><button onclick="updateService(${index}, '${type}')" class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase shadow-sm font-black">HECHO</button></div></div>`; }
+        function updateMLSuggestions() { const ml = calculateML(document.getElementById('bikeCategory').value, document.getElementById('tireSize').value, document.getElementById('tireWidth').value); document.getElementById('mlHint').innerText = `${ml} ML TOTAL`; }
+        function saveFrequencies() { config.freq = { natRell: document.getElementById('freqNatRell').value, natFull: document.getElementById('freqNatFull').value, sinRell: document.getElementById('freqSinRell').value, sinFull: document.getElementById('freqSinFull').value, overhaul: document.getElementById('freqOverhaul').value, cadena: document.getElementById('freqCadena').value, pastillas: document.getElementById('freqPastillas').value, bateria: document.getElementById('freqBateria').value }; saveAppData(); showOk(); }
+        function openSettings() { const f = config.freq; document.getElementById('workshopInput').value = ""; document.getElementById('freqNatRell').value = f.natRell; document.getElementById('freqNatFull').value = f.natFull; document.getElementById('freqSinRell').value = f.sinRell; document.getElementById('freqSinFull').value = f.sinFull; document.getElementById('freqOverhaul').value = f.overhaul; document.getElementById('freqCadena').value = f.cadena; document.getElementById('freqPastillas').value = f.pastillas; document.getElementById('freqBateria').value = f.bateria; renderWidthList(); renderWorkshopList(); document.getElementById('settingsModal').style.display = 'block'; }
+        function addWidth() { const v = parseInt(document.getElementById('newWidth').value); if(v && !config.widths.includes(v)) { config.widths.push(v); config.widths.sort((a,b)=>a-b); saveAppData(); renderWidthList(); document.getElementById('newWidth').value = ''; } }
         function renderWidthList() { document.getElementById('widthList').innerHTML = config.widths.map(w => `<div class="bg-black text-white px-3 py-1 rounded-lg font-bold flex items-center gap-2 text-xs font-black">${w}mm <button onclick="config.widths=config.widths.filter(x=>x!=${w});saveAppData();renderWidthList();" class="text-red-500 font-black">&times;</button></div>`).join(''); }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         function showOk() { const t = document.getElementById('toast'); t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 2500); }
